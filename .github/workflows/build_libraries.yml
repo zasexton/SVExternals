@@ -17,7 +17,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build_libaries_ubuntu"
-  build_libraries_ubuntu_ubuntu-20.04:
+  build-libraries-ubuntu-20:
     # The type of runner that the job will run on
     # ubuntu-20.04 == ubuntu latest
     runs-on: ubuntu-20.04
@@ -48,7 +48,7 @@ jobs:
         path: BuildOutput-Ubuntu-20.04.tar
         if-no-files-found: error
 
-  build-macos-macos-11:
+  build-libraries-macos-11:
     runs-on: macos-11
     steps:
     # Checkout the repository first
@@ -76,7 +76,7 @@ jobs:
         path: BuildOutput-MacOS-11.tar
         if-no-files-found: error
 
-  build-macos-macos-12:
+  build-libraries-macos-12:
     runs-on: macos-12
     steps:
     # Checkout the repository first
