@@ -6,7 +6,7 @@ pushd $SRC_DIR
 wget  https://sourceforge.net/projects/tcl/files/Tcl/$TCL_VERSION/tcl$TCL_VERSION-src.tar.gz
 
 # extract source
-tar -xvf tcl$TCL_VERSION-src.tar.gz
+tar -xf tcl$TCL_VERSION-src.tar.gz
 
 # delete tar
 rm tcl$TCL_VERSION-src.tar.gz

@@ -3,7 +3,7 @@
 # halt on error
 set -e
 
-source library_versions.sh
+source scripts/library_versions.sh
 
 CUR_DIR=$(pwd)
 
@@ -15,4 +15,6 @@ export INSTALL_DIR=$CUR_DIR'/install'
 mkdir -p $SRC_DIR
 mkdir -p $INSTALL_DIR
 
-source build_tcl.sh
+# build tcl
+mkdir -p output
+source scripts/build_tcl.sh > output/tcl.out
