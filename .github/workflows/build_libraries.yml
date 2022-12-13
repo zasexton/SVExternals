@@ -1,0 +1,43 @@
+# This is a basic workflow that is manually triggered
+
+name: Build SimVascular Externals
+
+# Controls when the action will run.
+on:
+  # Workflow runs when manually triggered using the UI or API.
+  workflow_dispatch:
+        
+  # This is to schedule run every Monday at 5:30 UTC
+  schedule:
+    # Runs every monday at 5:30 UTC
+    - cron: '30 5 * * 1'
+    
+  push:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build_libaries_ubuntu"
+  build_libraries_ubuntu:
+    # The type of runner that the job will run on
+    # ubuntu-20.04 == ubuntu latest
+    runs-on: ubuntu-20.04
+
+    steps:
+    # Checkout the repository first
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build libraries for Ubuntu
+      shell: bash
+      run: |
+        bash build_all.sh
+        tar -cvf SVExternals-Ubuntu-20.04.tar install
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: SVExternals Ubuntu 20.04
+        path: SVExternals-Ubuntu-20.04.tar
+        if-no-files-found: error
+        
+    
