@@ -23,4 +23,5 @@ mkdir -p output
 #source scripts/build_hdf5.sh > output/hdf5.out
 #source scripts/build_tinyxml2.sh > output/tinyxml2.out
 #source scripts/build_python.sh > output/python.out
-source scripts/build_freetype.sh > output/freetype.out
+#source scripts/build_freetype.sh > output/freetype.out
+source scripts/build_swig.sh > output/swig.out
