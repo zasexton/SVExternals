@@ -19,7 +19,6 @@ mkdir -p $TINYXML2_INSTALL_DIR
 pushd tinyxml2-$TINYXML2_VERSION
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=$TINYXML2_INSTALL_DIR ..
-echo Hello
 make -j 4 && make install
 popd
 
