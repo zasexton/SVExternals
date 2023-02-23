@@ -16,8 +16,11 @@ export GDCM_INSTALL_DIR=$INSTALL_DIR/gdcm-$GDCM_VERSION
 mkdir -p $GDCM_INSTALL_DIR
 echo $GDCM_INSTALL_DIR
 # build and install
-pushd gdcm-$GDCM_VERSION
-patch -p1 < $PATCH_DIR/gdcm-$GDCM_VERSION-clang.patch
+pwd
+pushd GDCM-$GDCM_VERSION
+if [ "$(uname)" == "Darwin" ]; then
+	patch -p1 < $PATCH_DIR/gdcm-$GDCM_VERSION-clang.patch
+fi
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=$GDCM_INSTALL_DIR ..
 make -j 4 && make install

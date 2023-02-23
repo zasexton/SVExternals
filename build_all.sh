@@ -26,4 +26,5 @@ mkdir -p output
 #source scripts/build_freetype.sh > output/freetype.out
 #source scripts/build_swig.sh > output/swig.out
 #source scripts/build_mmg.sh > output/mmg.out
-source scripts/build_gdcm.sh > output/gdcm.out
+#source scripts/build_gdcm.sh > output/gdcm.out
+source scripts/build_gdcm.sh || true
