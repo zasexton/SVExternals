@@ -20,7 +20,6 @@ then
     mkdir -p $VTK_INSTALL_DIR
 
     pushd VTK-$VTK_VERSION
-    rm -r build
     mkdir build
     cd build
 
