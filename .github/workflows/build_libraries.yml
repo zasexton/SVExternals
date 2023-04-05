@@ -31,6 +31,7 @@ jobs:
       shell: bash
       run: |
         bash build_all.sh
+        sudo apt-get install libpcre3 libpcre3-dev automake
         tar -cf SVExternals-Ubuntu-20.04.tar install
         tar -cf BuildOutput-Ubuntu-20.04.tar output
         
