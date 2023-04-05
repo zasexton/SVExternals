@@ -30,7 +30,6 @@ jobs:
     - name: Build libraries for Ubuntu
       shell: bash
       run: |
-        bash build_all.sh
         sudo apt-get install 
         sudo apt-get install libpcre3 
         sudo apt-get install libpcre3-dev 
@@ -39,6 +38,7 @@ jobs:
         sudo apt-get install libgl1-mesa-dev
         sudo apt-get install libglu1-mesa-dev
         sudo apt-get install libglut-dev
+        bash build_all.sh
         tar -cf SVExternals-Ubuntu-20.04.tar install
         tar -cf BuildOutput-Ubuntu-20.04.tar output
         
