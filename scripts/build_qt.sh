@@ -22,7 +22,7 @@ then
     # apply patch 
     # build and install
     pushd qt-everywhere-src-$QT_VERSION
-    ./configure --prefix=$QT_INSTALL_DIR
+    ./configure -opensource -confirm-license --prefix=$QT_INSTALL_DIR
     patch -p1 < $PATCH_DIR/qt-$QT_VERSION-clang.patch
     make -j 4
     make install
