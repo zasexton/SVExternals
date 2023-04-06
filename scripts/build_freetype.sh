@@ -3,6 +3,7 @@
 pushd $SRC_DIR
 
 export FREETYPE_INSTALL_DIR=$INSTALL_DIR/freetype-$FREETYPE_VERSION
+export FREETYPE_LIBRARY=libfreetype.so.$FREETYPE_VERSION
 
 if [[ $BUILD_FREETYPE -eq 1 ]]
 then

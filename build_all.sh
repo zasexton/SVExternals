@@ -17,16 +17,18 @@ mkdir -p $SRC_DIR
 mkdir -p $INSTALL_DIR
 
 # 
-BUILD_TCL=1
-BUILD_QT=1
-BUILD_HDF5=1
-BUILD_TINYXML2=1
-BUILD_PYTHON=1
-BUILD_FREETYPE=1
-BUILD_SWIG=1
-BUILD_MMG=1
-BUILD_GDCM=1
-BUILD_VTK=1
+BUILD_TCL=0
+BUILD_QT=0
+BUILD_HDF5=0
+BUILD_TINYXML2=0
+BUILD_PYTHON=0
+BUILD_FREETYPE=0
+BUILD_SWIG=0
+BUILD_MMG=0
+BUILD_GDCM=0
+BUILD_VTK=0
+BUILD_ITK=0
+BUILD_OPENCASCADE=1
 
 # build libraries. Even if the bool above are 0, we enter the scripts
 # as they set relevant env variables
@@ -41,3 +43,5 @@ source scripts/build_swig.sh > output/swig.out
 source scripts/build_mmg.sh > output/mmg.out
 source scripts/build_gdcm.sh > output/gdcm.out
 source scripts/build_vtk.sh > output/vtk.out
+source scripts/build_itk.sh > output/itk.out
+source scripts/build_opencascade.sh > output/itk.out

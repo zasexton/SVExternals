@@ -3,6 +3,7 @@
 pushd $SRC_DIR
 
 export HDF5_INSTALL_DIR=$INSTALL_DIR/hdf5-$HDF5_VERSION
+export HDF5_CMAKE_DIR=$HDF5_INSTALL_DIR/cmake
 
 if [[ $BUILD_HDF5 -eq 1 ]]
 then
@@ -23,7 +24,14 @@ then
 
     # build and install
     pushd hdf5-$HDF5_VERSION
-    ./configure --prefix=$HDF5_INSTALL_DIR
+    mkdir build && cd build
+    cmake \
+        -DHDF5_BUILD_SHARED_LIBS=1 \
+        -DHDF5_BUILD_HL_LIB:BOOL=ON \
+        -DHDF5_BUILD_CPP_LIB:BOOL=ON \
+        -DCMAKE_INSTALL_PREFIX=$HDF5_INSTALL_DIR \
+        -DCMAKE_BUILD_TYPE=Release \
+    ..
     make -j 4
     make install
     popd

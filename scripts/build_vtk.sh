@@ -2,12 +2,12 @@
 
 pushd $SRC_DIR
 
+VTK_MAJOR_VERSION=${VTK_VERSION%.*}
 export VTK_INSTALL_DIR=$INSTALL_DIR/vtk-$VTK_VERSION
-
+export VTK_CMAKE_DIR=$VTK_INSTALL_DIR/lib/cmake/vtk-$VTK_MAJOR_VERSION
 if [[ $BUILD_VTK -eq 1 ]]
 then
     # download tar 
-    VTK_MAJOR_VERSION=${VTK_VERSION%.*}
     wget https://www.vtk.org/files/release/$VTK_MAJOR_VERSION/VTK-$VTK_VERSION.tar.gz
 
     # extract source
@@ -22,8 +22,6 @@ then
     pushd VTK-$VTK_VERSION
     mkdir build
     cd build
-
-    echo $QT_INSTALL_DIR
 
     cmake \
         -DCMAKE_INSTALL_PREFIX=$VTK_INSTALL_DIR \
