@@ -1,0 +1,45 @@
+# This is the workflow for building Qt5 on windows 10
+
+name: Build Windows 10 Qt5
+
+# Controls when action will run
+
+on: 
+  workflow_dispatch:
+  
+  push:
+
+jobs:
+  build-windows-10-qt5:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        choco install activeperl
+        choco install python2
+        echo "C:\Python27" >> $GITHUB_PATH
+        echo "C:\Perl64\bin" >> $GITHUB_PATH
+
+    - name: Configure Qt5 source code
+      run: |
+        Invoke-WebRequest -Uri "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip" -OutFile qt-everywhere-src-5.14.2.zip
+        Expand-Archive -Path qt-everywhere-src-5.14.2.zip -DestinationPath .
+
+    - name: Configure and build Qt5
+      run: |
+        mkdir build
+        cd build
+        ..\qt-everywhere-src-5.14.2\configure -prefix %CD%\qtbase -opensource -confirm-license -nomake examples -nomake tests -opengl desktop
+        nmake
+        nmake install
+
+    - name: Archive build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: qt-5.14.2-windows
+        path: build\qtbase
+        

@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
         
   # This is to schedule run every Monday at 5:30 UTC
-  schedule:
+  #schedule:
     # Runs every monday at 5:30 UTC
-    - cron: '30 5 * * 1'
+    #- cron: '30 5 * * 1'
     
-  push:
+  #push:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -113,4 +113,26 @@ jobs:
         path: BuildOutput-MacOS-12.tar
         if-no-files-found: error
         
-    
+  build-libraries-windows-10:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        choco install python --version 3.9
+        choco install jom
+        choco install perl
+
+    - name: Download and Extract Qt5
+      run: |
+        Invoke-WebRequest -Uri "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip" -Outfile "qt-everywhere-src-5.14.2.zip"
+        Expand-Archive -Path "qt-everywhere-src-5.14.2.zip" -DestinationPath "."
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: SVExternals Windows 10
+        path: SVExternals-Windows-10.zip
+        if-no-files-found: error
