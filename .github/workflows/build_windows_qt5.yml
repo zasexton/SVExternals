@@ -41,12 +41,8 @@ jobs:
       run: |
         $url = "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
         $output = "qt-everywhere-src-5.14.2.zip"
-        $ProgressPreference = 'SilentlyContinue'
-        $webRequest = @{
-            Uri = $url
-            OutFile = $output
-        }
-        Invoke-WebRequest @webRequest
+        $wc = New-Object System.Net.WebClient
+        $wc.DownloadFile($url,$output)
         Expand-Archive -Path qt-everywhere-src-5.14.2.zip -DestinationPath .
 
     - name: Configure and build Qt5
