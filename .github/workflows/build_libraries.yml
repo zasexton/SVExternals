@@ -30,13 +30,15 @@ jobs:
     - name: Build libraries for Ubuntu
       shell: bash
       run: |
-        sudo apt-get install 
+        sudo apt-get install
+        sudo apt-get install llvm 
         sudo apt-get install libpcre3 
         sudo apt-get install libpcre3-dev 
         sudo apt-get install automake
         sudo apt-get install build-essential
         sudo apt-get install libgl1-mesa-dev
         sudo apt-get install libglu1-mesa-dev
+        sudo apt-get install byacc -y
         bash build_all.sh
         tar -cf SVExternals-Ubuntu-20.04.tar install
         tar -cf BuildOutput-Ubuntu-20.04.tar output

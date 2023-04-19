@@ -3,6 +3,7 @@
 pushd $SRC_DIR
 
 export SWIG_INSTALL_DIR=$INSTALL_DIR/swig-$SWIG_VERSION
+export SWIG_EXECUTABLE=$SWIG_INSTALL_DIR/bin/swig
 
 if [[ $BUILD_SWIG -eq 1 ]]
 then
@@ -23,7 +24,8 @@ then
     source autogen.sh # need automake for Mac (brew install automake)
     cd ..
     ./configure --prefix=$SWIG_INSTALL_DIR
-    make -j 4 && make install
+    make -j 4
+    make install
     popd
 fi
 
