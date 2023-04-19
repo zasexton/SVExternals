@@ -37,23 +37,15 @@ jobs:
         echo "C:\Python27" >> $GITHUB_PATH
         echo "C:\Perl64\bin" >> $GITHUB_PATH
 
-    - name: Configure Qt5 source code
+    - name: Download Qt5 source code
       run: |
         $url = "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
         $output = "qt-everywhere-src-5.14.2.zip"
-        $progressPreference = 'Continue'
+        $progress = 'Continue'
         $webRequest = @{
             Uri = $url
             OutFile = $output
-            Progress = {
-                param($webResponse)
-                
-                $bytesRecieved = $webResponse.BytesReceived
-                $totalBytesToRecieve = $webResponse.TotalBytesToReceive
-                $progress = [math]::Round(($bytesReceieved / $totalBytesToReceive)*100,2)
-                
-                Write-Progress -Activity "Downloading file..." -Status "Downloaded $bytesReceived of $totalBytesToReceive bytes ($progress%) -PercentComplete $progress"
-            }
+            ProgressPreference = $progress
         }
         Invoke-WebRequest @webRequest
         Expand-Archive -Path qt-everywhere-src-5.14.2.zip -DestinationPath .
