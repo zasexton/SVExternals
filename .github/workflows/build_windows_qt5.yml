@@ -41,11 +41,10 @@ jobs:
       run: |
         $url = "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
         $output = "qt-everywhere-src-5.14.2.zip"
-        $progress = 'Continue'
+        $ProgressPreference = 'SilentlyContinue'
         $webRequest = @{
             Uri = $url
             OutFile = $output
-            ProgressPreference = $progress
         }
         Invoke-WebRequest @webRequest
         Expand-Archive -Path qt-everywhere-src-5.14.2.zip -DestinationPath .
