@@ -39,7 +39,23 @@ jobs:
 
     - name: Configure Qt5 source code
       run: |
-        Invoke-WebRequest -Uri "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip" -OutFile qt-everywhere-src-5.14.2.zip
+        $url = "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
+        $output = "qt-everywhere-src-5.14.2.zip"
+        $progressPreference = 'Continue'
+        $webRequest = @{
+            Uri = $url
+            OutFile = $output
+            Progress = {
+                param($webResponse)
+                
+                $bytesRecieved = $webResponse.BytesReceived
+                $totalBytesToRecieve = $webResponse.TotalBytesToReceive
+                $progress = [math]::Round(($bytesReceieved / $totalBytesToReceive)*100,2)
+                
+                Write-Progress -Activity "Downloading file..." -Status "Downloaded $bytesReceived of $totalBytesToReceive bytes ($progress%) -PercentComplete $progress"
+            }
+        }
+        Invoke-WebRequest @webRequest
         Expand-Archive -Path qt-everywhere-src-5.14.2.zip -DestinationPath .
 
     - name: Configure and build Qt5
