@@ -23,7 +23,7 @@ jobs:
     - name: Get Explicit namke path
       shell: powershell
       run: |
-        cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
+        cd "C:\Program Files (x86)"
         echo ls
     
     - name: Call namke
