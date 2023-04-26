@@ -59,18 +59,11 @@ jobs:
           mkdir build
           cd build
           ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
-
-    #- name: Configure and build Qt5
-    #  run: |
-    #    mkdir build
-    #    cd build
-    #    ..\qt-everywhere-src-5.14.2\configure -prefix %CD%\qtbase -opensource -confirm-license -nomake examples -nomake tests -opengl desktop
-    #    nmake
-    #    nmake install
+          namke
 
     - name: Archive build artifact
       uses: actions/upload-artifact@v2
       with:
         name: qt-5.14.2-windows
-        path: build\qtbase
+        path: qt5\build\qtbase
         
