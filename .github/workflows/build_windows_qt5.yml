@@ -19,7 +19,11 @@ jobs:
       
     - name: Checkout Nmake  
       uses: ilammy/msvc-dev-cmd@v1
-        
+    
+    - name: Call make
+      run: |
+        make --version
+      
     - name: Check if ActivePerl is installed
       shell: powershell
       run: |
