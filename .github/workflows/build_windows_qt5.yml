@@ -49,9 +49,15 @@ jobs:
     - name: Install LLVM
       shell: powershell
       run: |
-          choco install llvm --installargs 'ADD_CMAKE_TO_PATH=System'
+          choco install llvm --force --installargs 'ADD_CMAKE_TO_PATH=System'
           refreshenv
           
+    - name: Install OpenSSL
+      shell: powershell
+      run: |
+        choco install openssl --force --installargs 'ADD_CMAKE_TO_PATH=System'
+        refreshenv
+        
     - name: Download Qt5 source code
       shell: powershell
       run: |
