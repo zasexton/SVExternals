@@ -36,7 +36,21 @@ jobs:
         choco install python2
         echo "C:\Python27" >> $GITHUB_PATH
         echo "C:\Perl64\bin" >> $GITHUB_PATH
-
+    - name: Install cmake
+      shell: powershell
+      run: |
+          $cmakeExePath = "$env:TEMP\cmake.exe"
+          Invoke-WebRequest -Uri https://github.com/Kitware/CMake/releases/download/v3.24.0/cmake-3.24.0-windows-x86_64.msi -UseBasicParsing -OutFile $cmakeExePath
+          msiexec.exe /i $exePath ADD_CMAKE_TO_PATH=User /qn | Out-Null
+          foreach($level in "Machine","User") {
+              [Environment]::GetEnvironmentVariables($level).GetEnumerator() | % {
+                  if($_.Name -match 'Path$') { 
+                      $_.Value = ($((Get-Content "Env:$($_.Name)") + ";$($_.Value)") -split ';' | Select -unique) -join ';'
+                  }
+                  $_
+              } | Set-Content -Path { "Env:$($_.Name)" }
+          }
+          echo cmake --version
     - name: Download Qt5 source code
       shell: powershell
       run: |
