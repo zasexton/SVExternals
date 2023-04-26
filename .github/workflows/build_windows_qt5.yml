@@ -19,10 +19,6 @@ jobs:
       
     - name: Checkout Nmake  
       uses: ilammy/msvc-dev-cmd@v1
-    
-    - name: Call make
-      run: |
-        make --version
       
     - name: Check if ActivePerl is installed
       shell: powershell
@@ -72,7 +68,7 @@ jobs:
           mkdir build
           cd build
           ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
-          mingw32-make
+          make -j2
 
     - name: Archive build artifact
       uses: actions/upload-artifact@v2
