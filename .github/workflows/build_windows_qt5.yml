@@ -23,6 +23,10 @@ jobs:
     - name: Print PATH
       shell: powershell
       run: echo $env:PATH
+    
+    - name: Call namke
+      shell: powershell
+      run: namke /?
       
     - name: Check if ActivePerl is installed
       shell: powershell
