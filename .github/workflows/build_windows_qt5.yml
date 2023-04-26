@@ -40,7 +40,7 @@ jobs:
     - name: Download Qt5 source code
       shell: powershell
       run: |
-        wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
+        Invoke-WebRequest -Uri https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip -OutFile qt-everywhere-src-5.14.2.zip -UseBasicParsing
         Expand-Archive -Path qt-everywhere-src-5.14.2.zip -DestinationPath .
 
     - name: Configure and build Qt5
