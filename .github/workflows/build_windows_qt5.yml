@@ -28,7 +28,7 @@ jobs:
     
     - name: Call namke
       shell: powershell
-      run: namke /?
+      run: mingw32-make -v
       
     - name: Check if ActivePerl is installed
       shell: powershell
