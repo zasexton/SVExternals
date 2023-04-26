@@ -16,7 +16,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+      
+    - name: Checkout Nmake  
+      uses: ilammy/msvc-dev-cmd@v1
+      
     - name: Check if ActivePerl is installed
       shell: powershell
       run: |
@@ -41,21 +44,11 @@ jobs:
       run: |
           choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
           refreshenv
-    #- name: Install mingw
-    #  shell: powershell
-    #  run: |
-    #      choco install mingw
-    #      refreshenv
     - name: Install LLVM
       shell: powershell
       run: |
           choco install llvm --version=12.0.0
           refreshenv
-    - name: Add NMAKE to the environment PATH
-      shell: powershell
-      run: |
-          echo "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\*\bin\Hostx64\x64" >> $GITHUB_PATH
-          nmake.exe /?
     - name: Download Qt5 source code
       shell: powershell
       run: |
