@@ -19,10 +19,6 @@ jobs:
       
     - name: Checkout Nmake  
       uses: ilammy/msvc-dev-cmd@v1
-      
-    - name: List installed
-      run: |
-        choco list --local-only
         
     - name: Check if ActivePerl is installed
       shell: powershell
@@ -53,7 +49,7 @@ jobs:
     - name: Install LLVM
       shell: powershell
       run: |
-          choco install llvm --version=12.0.0
+          choco install llvm --installargs 'ADD_CMAKE_TO_PATH=System'
           refreshenv
           
     - name: Download Qt5 source code
@@ -66,7 +62,7 @@ jobs:
           mkdir build
           cd build
           ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
-          namke
+          mingw32-make
 
     - name: Archive build artifact
       uses: actions/upload-artifact@v2
