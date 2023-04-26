@@ -19,6 +19,10 @@ jobs:
       
     - name: Checkout Nmake  
       uses: ilammy/msvc-dev-cmd@v1
+    
+    - name: Print PATH
+      shell: powershell
+      run: echo $env:PATH
       
     - name: Check if ActivePerl is installed
       shell: powershell
