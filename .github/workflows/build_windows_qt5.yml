@@ -46,7 +46,7 @@ jobs:
           git submodule update --init --recursive
           mkdir build
           cd build
-          ..\configure.bat -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
+          ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
 
     #- name: Configure and build Qt5
     #  run: |
