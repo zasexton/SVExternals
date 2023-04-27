@@ -11,90 +11,28 @@ on:
 
 jobs:
   build-windows-10-qt5:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
-    #- name: Checkout Nmake  
-    #  uses: ilammy/msvc-dev-cmd@v1
-      
-    #- name: Check if ActivePerl is installed
-    #  shell: powershell
-    #  run: |
-    #    $perlExists = (Get-Command perl -ErrorAction SilentlyContinue) -ne $null
-    #    echo "perlExists=$($perlExists)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         
-    #- name: Install activeperl
-    #  shell: powershell
-    #  if: env.perlExists == 'False'
-    #  run: |
-    #    choco install activeperl
-    #    echo "C:\Perl64\bin" >> $GITHUB_PATH
+    - name: Download Qt5 source code
+      shell: powershell
+      run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          git clone https://github.com/qt/qt5.git
+          cd qt5
+          git checkout v5.14.2
+          git submodule update --init --recursive
+          mkdir build
+          cd build
+          ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
+          nmake
         
-    #- name: Install python2
-    #  shell: powershell
-    #  run: |
-    #    choco install python2
-    #    echo "C:\Python27" >> $GITHUB_PATH
-    #    echo "C:\Perl64\bin" >> $GITHUB_PATH
-        
-    #- name: Install cmake
-    #  shell: powershell
-    #  run: |
-    #      choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
-    #      refreshenv
-          
-    #- name: Install LLVM
-    #  shell: powershell
-    #  run: |
-    #      choco install llvm --force --installargs 'ADD_CMAKE_TO_PATH=System'
-    #      refreshenv
-          
-    #- name: Install OpenSSL
-    #  shell: powershell
-    #  run: |
-    #    choco install openssl --force --installargs 'ADD_CMAKE_TO_PATH=System'
-    #    refreshenv
-        
-    #- name: Download Qt5 source code
-    #  shell: powershell
-    #  run: |
-    #      git clone https://github.com/qt/qt5.git
-    #      cd qt5
-    #      git checkout v5.14.2
-    #      git submodule update --init --recursive
-    #      mkdir build
-    #      cd build
-    #      ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
-    #      make -j2
-    - name: Install Python
-      uses: actions/setup-python@v2
+    - name: Archive build artifact
+      uses: actions/upload-artifact@v2
       with:
-        python-version: '3.9'
-
-    - name: Install aqtinstall
-      run: |
-        python -m pip install --upgrade pip
-        pip install aqtinstall
-
-    - name: Install Qt
-      run: |
-        python -m aqt install --outputdir ${{ github.workspace }}/Qt 5.15.2 windows desktop win64_msvc2019_64 -m qtbase qtdeclarative
-        
-    - name: Set up Qt environment variables
-      run: |
-        echo "QT_PATH=${{ github.workspace }}\Qt\5.15.2\msvc2019_64" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
-        echo "QMAKE_PATH=${{ github.workspace }}\Qt\5.15.2\msvc2019_64\bin\qmake.exe" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
-    - name: Build Qt application
-      run: |
-        & $env:QMAKE_PATH
-        msbuild /p:Configuration=Release
-        
-    #- name: Archive build artifact
-    #  uses: actions/upload-artifact@v2
-    #  with:
-    #    name: qt-5.14.2-windows
-    #    path: qt5\build\qtbase
+        name: qt-5.14.2-windows
+        path: qt5\build\qtbase
         
