@@ -20,7 +20,6 @@ jobs:
     - name: Donwload Qt5 source and configure
       shell: cmd
       run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           git clone https://github.com/qt/qt5.git
           cd qt5
           git checkout v5.14.2
@@ -28,7 +27,14 @@ jobs:
           mkdir build
           cd build
           ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
-          nmake
+    
+    - name: Build Qt5
+      shell: cmd
+      run: |
+        cd qt5
+        cd build
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        namke 
         
     - name: Archive build artifact
       uses: actions/upload-artifact@v2
