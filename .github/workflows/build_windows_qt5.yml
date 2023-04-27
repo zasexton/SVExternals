@@ -17,7 +17,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
         
-    - name: Download Qt5 source code
+    - name: Call vcvar64
+      shell: cmd
       run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           
