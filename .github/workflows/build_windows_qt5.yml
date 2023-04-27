@@ -18,9 +18,11 @@ jobs:
       uses: actions/checkout@v2
         
     - name: Download Qt5 source code
-      shell: powershell
       run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          
+    - name: Donwload Qt5 source and configure
+      run: |
           git clone https://github.com/qt/qt5.git
           cd qt5
           git checkout v5.14.2
