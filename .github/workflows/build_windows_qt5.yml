@@ -15,8 +15,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-    - uses: actions/checkout@v2
-    - uses: ilammy/msvc-dev-cmd@v1
+      uses: actions/checkout@v2
+    
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
       
     - name: Donwload Qt5 source and configure
       shell: cmd
