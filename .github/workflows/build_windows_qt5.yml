@@ -19,7 +19,12 @@ jobs:
     
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
-      
+
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v1
+      with:
+        version: "10.0"
+    
     - name: Donwload Qt5 source and configure
       shell: cmd
       run: |
