@@ -15,8 +15,9 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
-             
+    - uses: actions/checkout@v2
+    - uses: ilammy/msvc-dev-cmd@v1
+      
     - name: Donwload Qt5 source and configure
       shell: cmd
       run: |
@@ -27,25 +28,26 @@ jobs:
           mkdir build
           cd build
           ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
-    
-    - name: Create Build Directory
-      shell: cmd
-      run: |
-        cd qt5
-        cd build
+          namke
+          
+    #- name: Create Build Directory
+    #  shell: cmd
+    #  run: |
+    #    cd qt5
+    #    cd build
         
-    - name: Checkout MSVC repository
-      uses: ilammy/msvc-dev-cmd@v1
+    #- name: Checkout MSVC repository
+    #  uses: ilammy/msvc-dev-cmd@v1
       
-    - name: Which directory
-      run: |
-        echo "This is the current directory"
-        echo "============================="
-        echo "%CD%"
+    #- name: Which directory
+    #  run: |
+    #    echo "This is the current directory"
+    #    echo "============================="
+    #    echo "%CD%"
 
-    - name: Build Qt5
-      run: |
-        namke 
+    #- name: Build Qt5
+    #  run: |
+    #    namke 
         
     - name: Archive build artifact
       uses: actions/upload-artifact@v2
