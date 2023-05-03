@@ -25,9 +25,25 @@ jobs:
     #  with:
     #    version: "10.0"
         
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
+     
+    - name: Download and Build Qt5 
+      shell: pwsh
+      run: |
+           wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
+           unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
+           cd .\qt5\qt-everywhere-src-5.14.2
+           mkdir build
+           cd build
+           $path = $env:Path
+           $newpath = $path.replace("C:\msys64\usr\bin","")
+           $newpath = $newpath.replace("C:\Program Files\Git\usr\bin","")
+           $newpath = ($newpath + ";C:\msys64\usr\bin"+";C:\Program Files\Git\usr\bin")
+           $env:Path = $newpath
+           ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
+           nmake.exe
+   
     #- name: Donwload Qt5 source and configure
     #  shell: cmd
     #  run: |
@@ -62,5 +78,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: qt-5.14.2-windows
-        path: qt5\build\qtbase
+        path: qt5\qt-everywhere-src-5.14.2\build\qtbase
         
