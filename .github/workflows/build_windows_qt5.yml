@@ -20,25 +20,24 @@ jobs:
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Install LLVM and Clang
-      uses: KyleMayes/install-llvm-action@v1
-      with:
-        version: "10.0"
+    #- name: Install LLVM and Clang
+    #  uses: KyleMayes/install-llvm-action@v1
+    #  with:
+    #    version: "10.0"
         
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       
-    - name: Donwload Qt5 source and configure
-      shell: cmd
-      run: |
-          git clone https://github.com/qt/qt5.git
-          cd qt5
-          git checkout v5.14.2
-          git submodule update --init --recursive
-          mkdir build
-          cd build
-          ..\configure.bat -release -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
-          NMAKE
+    #- name: Donwload Qt5 source and configure
+    #  shell: cmd
+    #  run: |
+    #      git clone https://github.com/qt/qt5.git
+    #      cd qt5
+    #      git checkout v5.14.2
+    #      git submodule update --init --recursive
+    #      mkdir build
+    #      cd build
+    #      ..\configure.bat -release -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
 
     #- name: Create Build Directory
     #  shell: cmd
