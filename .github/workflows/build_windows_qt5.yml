@@ -28,12 +28,23 @@ jobs:
           cd build
           ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtwebengine
     
-    - name: Build Qt5
+    - name: Create Build Directory
       shell: cmd
       run: |
         cd qt5
         cd build
-        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        
+    - name: Checkout MSVC repository
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Which directory
+      run: |
+        echo "This is the current directory"
+        echo "============================="
+        echo "%CD%"
+
+    - name: Build Qt5
+      run: |
         namke 
         
     - name: Archive build artifact
