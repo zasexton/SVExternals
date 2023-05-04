@@ -14,12 +14,19 @@ jobs:
     runs-on: windows-2019
 
     steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+
     - name: Checkout repository
       uses: actions/checkout@v2
     
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
-
+      
     - name: Install wget
       run: |
           choco install wget
