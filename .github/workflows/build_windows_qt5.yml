@@ -89,5 +89,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: qt-5.14.2-windows
-        path: qt5\qt-everywhere-src-5.14.2\build\qtbase
+        path: C:\qt5\qt-everywhere-src-5.14.2\build\qtbase
         
