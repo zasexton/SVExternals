@@ -24,17 +24,23 @@ jobs:
     - name: Install wget
       run: |
           choco install wget
+    
+    - name: Switch to C Disk
+      shell: pwsh
+      run: |
+          C:
     #- name: Install LLVM and Clang
     #  uses: KyleMayes/install-llvm-action@v1
     #  with:
     #    version: "10.0"
         
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
      
     - name: Download and Build Qt5 
       shell: pwsh
       run: |
+           C:
            wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
            unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
            cd .\qt5\qt-everywhere-src-5.14.2
