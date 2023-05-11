@@ -67,9 +67,9 @@ jobs:
         cd build
         cpack -C Release CPackConfig.cmake
         mkdir HDF5_1-12-2
-        mv *.zip ./HDF5_1-12-1
-        mv *.exe ./HDF5_1-12-1
-        mv *.msi ./HDF5_1-12-1
+        mv ./HDF5-1.12.2-win64.zip ./HDF5_1-12-2
+        mv ./HDF5-1.12.2-win64.exe ./HDF5_1-12-2
+        mv ./HDF5-1.12.2-win64.msi ./HDF5_1-12-2
         
     #- name: Install HDF5
     #  shell: pwsh
@@ -83,4 +83,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: hdf5-1.12.2-windows
-        path: ./hdf5-hdf5-1_12_2/HDF5_1-12-1
+        path: ./hdf5-hdf5-1_12_2/HDF5_1-12-2
