@@ -1,0 +1,59 @@
+# This workflow builds HDF5
+
+name: Build Windows 10 HDF5
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  push:
+  
+jobs:
+  build-windows-10-hdf5:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+    
+    - name: Download HDF5
+      shell: pwsh
+      run: |
+        wget https://github.com/HDFGroup/hdf5/archive/refs/tags/hdf5-1_12_2.zip
+    
+    - name: Unzip HDF5
+      shell: pwsh
+      run: |
+        unzip .\hdf5-1_12_2.zip -d .\hdf5
+        
+    - name: Configuring HDF5
+      shell: pwsh
+      run: |
+        cd hdf5
+        cd hdf5-1_12_2
+        mkdir build
+        cmake \
+          -DHDF5_BUILD_SHARED_LIBS=1 \
+          -DHDF5_BUILD_HL_LIB:BOOL=ON \
+          -DHDF5_BUILD_CPP_LIB:BOOL=ON \
+          -DCMAKE_INSTALL_PREFIX=$HDF5_INSTALL_DIR \
+          -DCMAKE_BUILD_TYPE=Release \
+        .. -G "Visual Studio 16 2019" -A x64
+        
+    - name: Compile HDF5
+      shell: pwsh
+      run: |
+        cd hdf5
+        cd hdf5-1_12_2
+        cd build
+        cmake --build .
+    
