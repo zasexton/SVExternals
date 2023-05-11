@@ -1,0 +1,35 @@
+# Workflow for building GDCM 2.6.3 for windows
+
+name: Build Windows 10 GDCM
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  #push:
+  
+jobs:
+  build-windows-10-freetype:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+    
+    - name: Download Freetpye
+      shell: pwsh
+      run: |
+        wget
+    
+    - name: Unzip Freetpye
+      shell: pwsh
+      run: |
