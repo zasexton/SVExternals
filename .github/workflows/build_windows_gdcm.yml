@@ -10,7 +10,7 @@ on:
   #push:
   
 jobs:
-  build-windows-10-freetype:
+  build-windows-10-GDCM:
     runs-on: windows-2019
     
     steps:
@@ -25,11 +25,43 @@ jobs:
       run: |
         choco install wget
     
-    - name: Download Freetpye
+    - name: Download GDCM
       shell: pwsh
       run: |
-        wget
+        wget https://github.com/malaterre/GDCM/archive/refs/tags/v2.6.3.zip
     
-    - name: Unzip Freetpye
+    - name: Unzip GDCM
       shell: pwsh
       run: |
+        unzip v2.6.3.zip
+        
+    - name: Configure GDCM
+      shell: pwsh
+      run: |
+        cd GDCM-2.6.3
+        mkdir build
+        cd build
+        cmake .. -DGDCM_BUILD_SHARED_LIBS:BOOL=ON -DGDCM_BUILD_TESTING:BOOL=ON -DGDCM_BUILD_SHARED_LIBS:BOOL=ON -DGDCM_USE_SYSTEM_OPENSSL:BOOL=ON
+        
+    - name: Compile GDCM
+      shell: pwsh
+      run: |
+        cd GDCM-2.6.3
+        cd build
+        cmake --build . --config Release
+    
+    - name: Test GDCM
+      shell: pwsh
+      run: |
+        cd GDCM-2.6.3
+        cd build
+        ctest . -C Release
+        
+    - name: Packaging GDCM
+      shell: pwsh
+      run: |
+        cd GDCM-2.6.3
+        cd build
+        cpack -C Release CPackConfig.cmake
+        mkdir GDCM_2-6-3
+        
