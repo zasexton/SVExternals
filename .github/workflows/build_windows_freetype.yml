@@ -10,7 +10,7 @@ on:
   push:
   
 jobs:
-  build-windows-10-hdf5:
+  build-windows-10-freetype:
     runs-on: windows-2019
     
     steps:
@@ -38,7 +38,7 @@ jobs:
     - name: Configure Freetype
       shell: pwsh
       run: |
-        cd ./ft263
+        cd ./freetype-2.6.3
         mkdir build
         cd build
         cmake ..
@@ -46,7 +46,7 @@ jobs:
     - name: Compile Freetype
       shell: pwsh
       run: |
-        cd ./ft263
+        cd ./freetype-2.6.3
         cd build
         cmake --build . --config Release
         
