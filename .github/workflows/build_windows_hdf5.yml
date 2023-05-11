@@ -70,7 +70,9 @@ jobs:
         mv ./HDF5-1.12.2-win64.zip ./HDF5_1-12-2
         mv ./HDF5-1.12.2-win64.exe ./HDF5_1-12-2
         mv ./HDF5-1.12.2-win64.msi ./HDF5_1-12-2
-        
+        dir
+        cd HDF5_1-12-2
+        dir
     #- name: Install HDF5
     #  shell: pwsh
     #  run: |
