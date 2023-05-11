@@ -1,0 +1,53 @@
+# Workflow for building Freetype 2.6.3 for windows
+
+name: Build Windows 10 Freetype
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  push:
+  
+jobs:
+  build-windows-10-hdf5:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+    
+    - name: Download Freetpye
+      shell: pwsh
+      run: |
+        wget https://download.savannah.gnu.org/releases/freetype/freetype-old/ft263.zip
+    
+    - name: Unzip Freetpye
+      shell: pwsh
+      run: |
+        unzip ./ft263.zip
+    
+    - name: Configure Freetype
+      shell: pwsh
+      run: |
+        cd ./ft263
+        mkdir build
+        cd build
+        cmake ..
+    
+    - name: Compile Freetype
+      shell: pwsh
+      run: |
+        cd ./ft263
+        cd build
+        cmake --build . --config Release
+        
+    
