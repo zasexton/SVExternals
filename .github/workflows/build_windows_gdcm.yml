@@ -41,7 +41,7 @@ jobs:
         cd GDCM-2.6.3
         mkdir build
         cd build
-        cmake .. -DGDCM_BUILD_SHARED_LIBS:BOOL=ON -DGDCM_BUILD_TESTING:BOOL=ON -DGDCM_BUILD_SHARED_LIBS:BOOL=ON -DGDCM_USE_SYSTEM_OPENSSL:BOOL=ON
+        cmake .. -DGDCM_BUILD_SHARED_LIBS:BOOL=ON -DGDCM_BUILD_TESTING:BOOL=ON -DGDCM_BUILD_SHARED_LIBS:BOOL=ON
         
     - name: Compile GDCM
       shell: pwsh
