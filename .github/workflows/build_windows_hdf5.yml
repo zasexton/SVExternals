@@ -7,7 +7,7 @@ name: Build Windows 10 HDF5
 on:
   workflow_dispatch:
   
-  push:
+  #push:
   
 jobs:
   build-windows-10-hdf5:
@@ -85,4 +85,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: hdf5-1.12.2-windows
-        path: ./hdf5-hdf5-1_12_2/HDF5_1-12-2
+        path: ./hdf5-hdf5-1_12_2/build/HDF5_1-12-2
