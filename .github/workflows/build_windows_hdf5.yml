@@ -33,12 +33,11 @@ jobs:
     - name: Unzip HDF5
       shell: pwsh
       run: |
-        unzip .\hdf5-1_12_2.zip -d .\hdf5
+        unzip .\hdf5-1_12_2.zip
         
     - name: Configuring HDF5
       shell: pwsh
       run: |
-        cd hdf5
         cd hdf5-hdf5-1_12_2
         mkdir build
         cd build
@@ -47,8 +46,20 @@ jobs:
     - name: Compile HDF5
       shell: pwsh
       run: |
-        cd hdf5
         cd hdf5-hdf5-1_12_2
         cd build
         cmake --build .
     
+    - name: Install HDF5
+      shell: pwsh
+      run: |
+        $HDF5_INSTALL_DIR = "%CD%\hdf5"
+        cd hdf5-hdf5-1_12_2
+        cd build
+        cmake --install . --config Release --prefix $HDF5_INSTALL_DIR
+        
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: hdf5-1.12.2-windows
+        path: ./hdf5
