@@ -39,7 +39,7 @@ jobs:
       shell: pwsh
       run: |
         cd hdf5
-        cd hdf5-1_12_2
+        cd hdf5-hdf5-1_12_2
         mkdir build
         cmake \
           -DHDF5_BUILD_SHARED_LIBS=1 \
@@ -53,7 +53,7 @@ jobs:
       shell: pwsh
       run: |
         cd hdf5
-        cd hdf5-1_12_2
+        cd hdf5-hdf5-1_12_2
         cd build
         cmake --build .
     
