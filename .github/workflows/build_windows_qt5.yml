@@ -7,7 +7,7 @@ name: Build Windows 10 Qt5
 on: 
   workflow_dispatch:
   
-  push:
+  #push:
 
 jobs:
   build-windows-10-qt5:
