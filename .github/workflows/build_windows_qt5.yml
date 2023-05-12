@@ -46,9 +46,9 @@ jobs:
            wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
            unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
            cd .\qt5\qt-everywhere-src-5.14.2
-           patch < $old_directory/patches/qt-5.14.2-angle.patch
-           patch < $old_directory/patches/qt-5.14.2-circular-queue.patch
-           patch < $old_directory/patches/qt-5.14.2-lab-color-space.patch
+           patch -p1 < $old_directory/patches/qt-5.14.2-angle.patch
+           patch -p1 < $old_directory/patches/qt-5.14.2-circular-queue.patch
+           patch -p1 < $old_directory/patches/qt-5.14.2-lab-color-space.patch
            mkdir build
            cd build
            $path = $env:Path
