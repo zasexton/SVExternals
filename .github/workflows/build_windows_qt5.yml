@@ -50,6 +50,11 @@ jobs:
            git apply $old_directory/patches/qt-5.14.2-circular-queue.patch
            git apply $old_directory/patches/qt-5.14.2-lab-color-space.patch
            mkdir build
+    - name: Build Qt5
+      shell: pwsh
+      run: |
+           C:
+           cd .\qt5\qt-everywhere-src-5.14.2
            cd build
            $path = $env:Path
            $newpath = $path.replace("C:\msys64\usr\bin","")
