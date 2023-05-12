@@ -41,7 +41,7 @@ jobs:
     - name: Download and Build Qt5 
       shell: pwsh
       run: |
-           $old_directory = "%CD%"
+           cp -r ./patches C:
            C:
            wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
            unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
