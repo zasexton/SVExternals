@@ -1,0 +1,47 @@
+ This workflow builds ITK
+
+name: Build Windows 10 ITK
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  #push:
+  
+jobs:
+  build-windows-10-itk:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+
+    - name: Download ITK and Unzip
+      shell: pwsh
+      run: |
+        C:
+        wget https://github.com/InsightSoftwareConsortium/ITK/releases/download/v5.2.1/InsightToolkit-5.2.1.zip
+        unzip InsightToolkit-5.2.1.zip
+    
+    - name: Build ITK
+      shell: pwsh
+      run: |
+        C:
+        cd InsightToolkit-5.2.1
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build . --config Release
+        
+    
+        
+        
