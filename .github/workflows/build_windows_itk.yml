@@ -32,16 +32,36 @@ jobs:
         wget https://github.com/InsightSoftwareConsortium/ITK/releases/download/v5.2.1/InsightToolkit-5.2.1.zip
         unzip InsightToolkit-5.2.1.zip
     
-    - name: Build ITK
+    - name: Configure ITK
       shell: pwsh
       run: |
         C:
         cd InsightToolkit-5.2.1
         mkdir build
         cd build
-        cmake ..
-        cmake --build . --config Release
+        mkdir ITK_5-2-1
+        cmake -DCMAKE_INSTALL_PREFIX=C:/InsightToolkit-5.2.1/build/ITK_5-2-1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXAMPLES=0 -DModule_ITKReview=1 ..
         
+    - name: Build ITK
+      shell: pwsh
+      run: |
+        C:
+        cd InsightToolkit-5.2.1
+        cd build
+        cmake --build . --config Release
     
+    - name: Install ITK
+      shell: pwsh
+      run: |
+        C:
+        cd InsightToolkit-5.2.1
+        cd build
+        cmake --install . --config Release --prefix C:/InsightToolkit-5.2.1/build/ITK_5-2-1 
+        
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: hdf5-1.12.2-windows
+        path: ./hdf5-hdf5-1_12_2/build/HDF5_1-12-2
         
         
