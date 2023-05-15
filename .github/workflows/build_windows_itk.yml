@@ -61,7 +61,7 @@ jobs:
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: hdf5-1.12.2-windows
-        path: ./hdf5-hdf5-1_12_2/build/HDF5_1-12-2
+        name: itk-5.2.1-windows
+        path: C:/InsightToolkit-5.2.1/build/ITK_5-2-1
         
         
