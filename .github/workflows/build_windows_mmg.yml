@@ -87,3 +87,9 @@ jobs:
     #  with:
     #    name: hdf5-1.12.2-windows
     #    path: ./hdf5-hdf5-1_12_2/build/HDF5_1-12-2
+    
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mmg-5-3-9-windows
+        path: ./mmg-5.3.9/build/MMG_5-3-9
