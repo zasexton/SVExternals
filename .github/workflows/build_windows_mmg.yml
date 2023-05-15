@@ -54,6 +54,12 @@ jobs:
         cd build
         cmake --build . --config Release
     
+    - name: Install MMG
+      shell: pwsh
+      run: |
+        cd mmg-5.3.9
+        cd build
+        cmake --install . --config Release
     #- name: Testing HDF5
     #  shell: pwsh
     #  run: |
