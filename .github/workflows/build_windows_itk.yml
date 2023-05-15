@@ -1,4 +1,4 @@
- This workflow builds ITK
+# This workflow builds ITK
 
 name: Build Windows 10 ITK
 
