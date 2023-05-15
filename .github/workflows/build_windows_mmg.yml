@@ -44,7 +44,8 @@ jobs:
         cd mmg-5.3.9
         mkdir build
         cd build
-        cmake ..
+        mkdir MMG_5-3-9
+        cmake -DCMAKE_INSTALL_PREFIX=./MMG_5-3-9 ..
         
     - name: Compile MMG
       shell: pwsh
