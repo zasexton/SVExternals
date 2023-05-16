@@ -59,7 +59,7 @@ jobs:
       run: |
         cd mmg-5.3.9
         cd build
-        cmake --install . --config Release
+        cmake --install . --config Release --prefix ./MMG_5-3-9
     #- name: Testing HDF5
     #  shell: pwsh
     #  run: |
