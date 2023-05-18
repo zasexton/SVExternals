@@ -47,8 +47,8 @@ jobs:
            unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
            cd .\qt5\qt-everywhere-src-5.14.2
            
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
       
     - name: Apply Patches
       shell: pwsh
