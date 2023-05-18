@@ -1,7 +1,7 @@
-diff --git a/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h b/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h
+diff --git C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h
 index 59dbfad04..134357395 100644
---- a/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h
-+++ b/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h
+--- C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h
++++ C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h
 @@ -74,7 +74,7 @@ class CircularQueue {
        return queue_->Get(pos_);
      }
