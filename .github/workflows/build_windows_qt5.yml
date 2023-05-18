@@ -47,17 +47,17 @@ jobs:
            unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
            cd .\qt5\qt-everywhere-src-5.14.2
            
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
       
     - name: Apply Patches
       shell: pwsh
       run: |
            C:
            cd .\qt5\qt-everywhere-src-5.14.2
-           git apply C:/patches/qt-5.14.2-angle.patch
-           git apply C:/patches/qt-5.14.2-circular-queue.patch
-           git apply C:/patches/qt-5.14.2-lab-color-space.patch
+           patch --verbose -i C:/patches/qt-5.14.2-angle.patch
+           patch --verbose -i C:/patches/qt-5.14.2-circular-queue.patch
+           patch --verbose -i C:/patches/qt-5.14.2-lab-color-space.patch
            mkdir build
     - name: Build Qt5
       shell: pwsh
