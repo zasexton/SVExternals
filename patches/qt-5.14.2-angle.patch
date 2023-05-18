@@ -1,7 +1,7 @@
-diff --git ./src/3rdparty/chromium/third_party/angle/BUILD.gn ./src/3rdparty/chromium/third_party/angle/BUILD.gn
+diff --git C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn
 index ad7675f4e..4a43479d9 100644
---- ./src/3rdparty/chromium/third_party/angle/BUILD.gn
-+++ ./src/3rdparty/chromium/third_party/angle/BUILD.gn
+--- C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn
++++ C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn
 @@ -126,7 +126,6 @@ config("extra_warnings") {
    # Enable more default warnings on Windows.
    if (is_win) {
