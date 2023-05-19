@@ -56,9 +56,10 @@ jobs:
            C:
            cd .\qt5\qt-everywhere-src-5.14.2
            patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i C:/patches/qt-5.14.2-angle.patch
-           patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
            patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i C:/patches/qt-5.14.2-lab-color-space.patch
            mkdir build
+           
+   # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5
       shell: pwsh
       run: |
