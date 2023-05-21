@@ -50,6 +50,13 @@ jobs:
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
       
+    - name: Download and Unzip JOM  
+      shell: pwsh
+      run: |
+           C:
+           wget https://download.qt.io/official_releases/jom/jom_1_1_3.zip
+           unzip .\jom_1_1_3.zip
+      
     - name: Apply Patches
       shell: pwsh
       run: |
@@ -72,7 +79,7 @@ jobs:
            $newpath = ($newpath + ";C:\msys64\usr\bin"+";C:\Program Files\Git\usr\bin")
            $env:Path = $newpath
            ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop
-           jom.exe
+           C:\jom_1_1_3\jom.exe
     # nmake.exe
    
     #- name: Donwload Qt5 source and configure
