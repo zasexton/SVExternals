@@ -1,6 +1,6 @@
-# This workflow builds MMG
+# This workflow builds VTK
 
-name: Build Windows 10 MMG
+name: Build Windows 10 VTK
 
 # Controls when action will run
 
@@ -10,7 +10,7 @@ on:
   #push:
   
 jobs:
-  build-windows-10-mmg:
+  build-windows-10-vtk:
     runs-on: windows-2019
     
     steps:
@@ -28,17 +28,17 @@ jobs:
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
     
-    - name: Download MMG
+    - name: Download VTK
       shell: pwsh
       run: |
-        wget https://github.com/MmgTools/mmg/archive/refs/tags/v5.3.9.zip
+        wget https://github.com/Kitware/VTK/archive/refs/tags/v9.2.6.zip
     
-    - name: Unzip MMG
+    - name: Unzip VTK
       shell: pwsh
       run: |
-        unzip .\v5.3.9.zip
+        unzip .\v9.2.6.zip
         
-    - name: Configuring MMG
+    - name: Configuring VTK
       shell: pwsh
       run: |
         cd mmg-5.3.9
