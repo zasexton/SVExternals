@@ -72,7 +72,8 @@ jobs:
            $newpath = ($newpath + ";C:\msys64\usr\bin"+";C:\Program Files\Git\usr\bin")
            $env:Path = $newpath
            ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop
-           nmake.exe
+           jom.exe
+    # nmake.exe
    
     #- name: Donwload Qt5 source and configure
     #  shell: cmd
