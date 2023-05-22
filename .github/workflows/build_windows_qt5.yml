@@ -38,14 +38,14 @@ jobs:
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
      
-    #- name: Download and Build Qt5 
-    #  shell: pwsh
-    #  run: |
-    #       cp -r ./patches C:
-    #       C:
-    #       wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
-    #       unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
-    #       cd .\qt5\qt-everywhere-src-5.14.2
+    - name: Download and Build Qt5 
+      shell: pwsh
+      run: |
+           cp -r ./patches C:
+           C:
+           wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
+           unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
+           cd .\qt5\qt-everywhere-src-5.14.2
            
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
@@ -56,7 +56,6 @@ jobs:
            C:
            wget https://download.qt.io/official_releases/jom/jom_1_1_3.zip
            unzip .\jom_1_1_3.zip
-           dir
            
     - name: Apply Patches
       shell: pwsh
@@ -80,7 +79,7 @@ jobs:
            $newpath = ($newpath + ";C:\msys64\usr\bin"+";C:\Program Files\Git\usr\bin")
            $env:Path = $newpath
            ..\configure.bat -release -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop
-           C:\jom_1_1_3\jom.exe
+           C:\jom.exe
     # nmake.exe
    
     #- name: Donwload Qt5 source and configure
