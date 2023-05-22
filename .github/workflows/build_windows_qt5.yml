@@ -79,7 +79,7 @@ jobs:
            $newpath = ($newpath + ";C:\msys64\usr\bin"+";C:\Program Files\Git\usr\bin")
            $env:Path = $newpath
            ..\configure.bat -release -mp -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie 
-           C:\jom.exe -j 2
+           C:\jom.exe
     # nmake.exe
    
     #- name: Donwload Qt5 source and configure
