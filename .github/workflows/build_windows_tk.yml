@@ -28,6 +28,11 @@ jobs:
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
     
+    - name: Download TCL
+      shell: pwsh
+      run: |
+        wget https://sourceforge.net/projects/tcl/files/Tcl/8.6.13/tcl8613-src.zip
+    
     - name: Download TK
       shell: pwsh
       run: |
@@ -36,14 +41,29 @@ jobs:
     - name: Unzip TCL
       shell: pwsh
       run: |
+        unzip ./tcl8613-src.zip
+    
+    - name: Unzip TK
+      shell: pwsh
+      run: |
         unzip ./tk8613-src.zip
+
+    - name: Configuring TCL
+      shell: pwsh
+      run: |
+        cd tcl8.6.13
+        cd win
+        mkdir tcl_install
+        nmake.exe -f makefile.vc INSTALLDIR=./tcl_install
+        dir
         
     - name: Configuring TK
       shell: pwsh
       run: |
         cd tk8.6.13
         cd win
-        nmake.exe -f makefile.vc
+        mkdir tk_install
+        nmake.exe -f makefile.vc INSTALLDIR=./tk_install TCLDIR=../../tcl8.6.13/win
         dir
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
@@ -92,4 +112,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: TK Install
-        path: ./tk8.6.13/win/Release_AMD64_VC1929
+        path: ./tk8.6.13/win/tk_install
