@@ -1,0 +1,95 @@
+# Build TK for Windows 10
+
+name: Build Windows 10 TK
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  #push:
+  
+jobs:
+  build-windows-10-tk:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+        
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
+    
+    - name: Download TK
+      shell: pwsh
+      run: |
+        wget https://sourceforge.net/projects/tcl/files/Tcl/8.6.13/tk8613-src.zip
+    
+    - name: Unzip TCL
+      shell: pwsh
+      run: |
+        unzip ./tk8613-src.zip
+        
+    - name: Configuring TK
+      shell: pwsh
+      run: |
+        cd tk8.6.13
+        cd win
+        nmake.exe -f makefile.vc
+        dir
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
+      
+    #- name: Install MMG
+    #  shell: pwsh
+    #  run: |
+    #    cd mmg-5.3.9
+    #    cd build
+    #    cmake --install . --config Release --prefix ./MMG_5-3-9
+    #- name: Testing HDF5
+    #  shell: pwsh
+    #  run: |
+    #    cd hdf5-hdf5-1_12_2
+    #    cd build
+    #    ctest . -C Release
+        
+    #- name: Packaging HDF5
+    #  shell: pwsh
+    #  run: |
+    #    cd hdf5-hdf5-1_12_2
+    #    cd build
+    #    cpack -C Release CPackConfig.cmake
+    #    mkdir HDF5_1-12-2
+    #    mv ./HDF5-1.12.2-win64.zip ./HDF5_1-12-2
+    #    mv ./HDF5-1.12.2-win64.exe ./HDF5_1-12-2
+    #    mv ./HDF5-1.12.2-win64.msi ./HDF5_1-12-2
+    #    dir
+    #    cd HDF5_1-12-2
+    #    dir
+    #- name: Install HDF5
+    #  shell: pwsh
+    #  run: |
+    #    $HDF5_INSTALL_DIR = "%CD%\hdf5"
+    #    cd hdf5-hdf5-1_12_2
+    #    cd build
+    #    cmake --install . --config Release --prefix $HDF5_INSTALL_DIR
+        
+    #- name: Archive Build Artifact
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    name: hdf5-1.12.2-windows
+    #    path: ./hdf5-hdf5-1_12_2/build/HDF5_1-12-2
+    
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: TK Install
+        path: ./tk8.6.13/win/Release_AMD64_VC1929
