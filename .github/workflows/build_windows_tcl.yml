@@ -18,15 +18,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    #- name: Setup MSVC
-    #  uses: ilammy/msvc-dev-cmd@v1
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
       
     - name: Install wget
       run: |
         choco install wget
         
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
     
     - name: Download TCL
       shell: pwsh
@@ -41,23 +41,21 @@ jobs:
     - name: Configuring TCL
       shell: pwsh
       run: |
+        cd tcl8613-src
         cd tcl8.6.13
         mkdir tcl_install
         ./configure.bat --prefix=./tcl_install
+        nmake.exe
         
-    - name: Compile MMG
-      shell: pwsh
-      run: |
-        cd mmg-5.3.9
-        cd build
-        cmake --build . --config Release
-    
-    - name: Install MMG
-      shell: pwsh
-      run: |
-        cd mmg-5.3.9
-        cd build
-        cmake --install . --config Release --prefix ./MMG_5-3-9
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      
+    #- name: Install MMG
+    #  shell: pwsh
+    #  run: |
+    #    cd mmg-5.3.9
+    #    cd build
+    #    cmake --install . --config Release --prefix ./MMG_5-3-9
     #- name: Testing HDF5
     #  shell: pwsh
     #  run: |
@@ -95,5 +93,5 @@ jobs:
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: mmg-5-3-9-windows
-        path: ./mmg-5.3.9/build/MMG_5-3-9
+        name: TCL Install
+        path: ./tcl8613/tcl8.6.13/tcl_install
