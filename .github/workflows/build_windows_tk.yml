@@ -54,7 +54,7 @@ jobs:
         cd tcl8.6.13
         cd win
         mkdir tcl_install
-        nmake.exe -f makefile.vc INSTALLDIR=./tcl_install
+        nmake.exe -f makefile.vc install INSTALLDIR=./tcl_install
         dir
         
     - name: Configuring TK
@@ -63,7 +63,7 @@ jobs:
         cd tk8.6.13
         cd win
         mkdir tk_install
-        nmake.exe -f makefile.vc INSTALLDIR=./tk_install TCLDIR=../../tcl8.6.13/win
+        nmake.exe -f makefile.vc install INSTALLDIR=./tk_install TCLDIR=../../tcl8.6.13
         dir
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
