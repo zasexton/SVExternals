@@ -1,2 +1,99 @@
 # Build TCL for Windows 10
 
+name: Build Windows 10 TCL
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  #push:
+  
+jobs:
+  build-windows-10-tcl:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    #- name: Setup MSVC
+    #  uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+        
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+    
+    - name: Download TCL
+      shell: pwsh
+      run: |
+        wget https://sourceforge.net/projects/tcl/files/Tcl/8.6.13/tcl8613-src.zip
+    
+    - name: Unzip TCL
+      shell: pwsh
+      run: |
+        unzip ./tcl8613-src.zip
+        
+    - name: Configuring TCL
+      shell: pwsh
+      run: |
+        cd tcl8613-src
+        mkdir tcl_install
+        ./configure.bat --prefix=./tcl_install
+        
+    - name: Compile MMG
+      shell: pwsh
+      run: |
+        cd mmg-5.3.9
+        cd build
+        cmake --build . --config Release
+    
+    - name: Install MMG
+      shell: pwsh
+      run: |
+        cd mmg-5.3.9
+        cd build
+        cmake --install . --config Release --prefix ./MMG_5-3-9
+    #- name: Testing HDF5
+    #  shell: pwsh
+    #  run: |
+    #    cd hdf5-hdf5-1_12_2
+    #    cd build
+    #    ctest . -C Release
+        
+    #- name: Packaging HDF5
+    #  shell: pwsh
+    #  run: |
+    #    cd hdf5-hdf5-1_12_2
+    #    cd build
+    #    cpack -C Release CPackConfig.cmake
+    #    mkdir HDF5_1-12-2
+    #    mv ./HDF5-1.12.2-win64.zip ./HDF5_1-12-2
+    #    mv ./HDF5-1.12.2-win64.exe ./HDF5_1-12-2
+    #    mv ./HDF5-1.12.2-win64.msi ./HDF5_1-12-2
+    #    dir
+    #    cd HDF5_1-12-2
+    #    dir
+    #- name: Install HDF5
+    #  shell: pwsh
+    #  run: |
+    #    $HDF5_INSTALL_DIR = "%CD%\hdf5"
+    #    cd hdf5-hdf5-1_12_2
+    #    cd build
+    #    cmake --install . --config Release --prefix $HDF5_INSTALL_DIR
+        
+    #- name: Archive Build Artifact
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    name: hdf5-1.12.2-windows
+    #    path: ./hdf5-hdf5-1_12_2/build/HDF5_1-12-2
+    
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mmg-5-3-9-windows
+        path: ./mmg-5.3.9/build/MMG_5-3-9
