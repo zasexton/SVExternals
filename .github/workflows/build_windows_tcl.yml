@@ -41,7 +41,7 @@ jobs:
     - name: Configuring TCL
       shell: pwsh
       run: |
-        cd tcl8613-src
+        cd tcl8.6.13
         mkdir tcl_install
         ./configure.bat --prefix=./tcl_install
         
