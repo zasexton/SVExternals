@@ -42,6 +42,7 @@ jobs:
       shell: pwsh
       run: |
         cd tcl8.6.13
+        cd win
         mkdir tcl_install
         ./configure.bat --prefix=./tcl_install
         nmake.exe
