@@ -44,8 +44,7 @@ jobs:
         cd tcl8.6.13
         cd win
         mkdir tcl_install
-        ./configure.bat --prefix=./tcl_install
-        nmake.exe
+        nmake.exe -f makefile.vc
         
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
