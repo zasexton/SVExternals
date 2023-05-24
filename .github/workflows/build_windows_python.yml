@@ -41,6 +41,14 @@ jobs:
         cd Python-3.9.10
         ./PCBuild/build.bat
     
+    - name: Test Python 64-bit
+      shell: pwsh
+      run: |
+        cd Python-3.9.10
+        cd PCbuild
+        cd amd64
+        ./python_d.exe -m test
+    
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v3
       with:
