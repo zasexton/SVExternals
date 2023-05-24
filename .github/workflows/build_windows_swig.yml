@@ -1,0 +1,54 @@
+# Build SWIG for Windows 10
+
+name: Build Windows 10 SWIG
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  #push:
+  
+jobs:
+  build-windows-10-swig:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+    
+    - name: Download SWIG
+      shell: pwsh
+      run: |
+        wget https://github.com/swig/swig/archive/refs/tags/v3.0.12.zip
+    
+    - name: Unzip SWIG
+      shell: pwsh
+      run: |
+        unzip ./v3.0.12.zip
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
+    - name: Configuring SWIG
+      shell: pwsh
+      run: |
+        cd swig-3.0.12
+        cd swig-3.0.12
+        ./configure
+        make
+        make install
+        
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: TCL Install
+        path: ./tcl8.6.13/win/tcl_install
