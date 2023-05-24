@@ -45,7 +45,7 @@ jobs:
         mkdir build
         cd build
         mkdir tinyxml2_install
-        cmake -DCMAKE_INSTALL_PREFIX=$(pwd)/tinyxml2_install -DCMAKE_BUILD_TYPE=Release .. 
+        cmake -DCMAKE_BUILD_TYPE=Release .. 
     
     - name: Build TinyXML2
       shell: pwsh
@@ -59,7 +59,7 @@ jobs:
       run: |
         cd tinyxml2-6.2.0
         cd build
-        cmake --install .
+        cmake --install . --install-prefix=$(pwd)/tinyxml2_install
         
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v3
