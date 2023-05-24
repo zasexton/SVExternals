@@ -44,6 +44,9 @@ jobs:
     - name: Configuring SWIG
       shell: msys2 {0}
       run: |
+        pacman -S msys/libtool
+        pacman -S msys/autoconf
+        pacman -S msys/automake-wrapper
         cd swig-3.0.12
         ./autogen.sh
         mkdir swig_install
