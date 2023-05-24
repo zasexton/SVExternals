@@ -1,58 +1,58 @@
 # Build All SVExternals for Windows 10
 
-name: Build SimVascular Externals - Windows
+#name: Build SimVascular Externals - Windows
 
 # Controls when the action will run.
-on:
-  # Workflow runs when manually dispatched
-  workflow_dispatch:
+#on:
+#  # Workflow runs when manually dispatched
+#  workflow_dispatch:
 
-jobs:
-  build-vtk-windows-10:
-  runs-on: windows-2019
-  needs: [build-tcltk-windows-10, build-qt-windows-10, build-python-windows-10]
+#jobs:
+#  build-vtk-windows-10:
+#  runs-on: windows-2019
+#  needs: [build-tcltk-windows-10, build-qt-windows-10, build-python-windows-10]
   
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: Install dependencies
-      shell: pwsh
-      run: |
-        # unknown right now
-    
-    - name: Get TCL artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: TCL Install
-    
-    - name: Get TK artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: TK Install
-        
-    - name: Get QT artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: QT Install
-    
-    - name: Get Python artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: Python Install
-    
-    - name: Extract dependencies
-      shell: pwsh
-      run: |
-        mkdir vtk_dependencies
-        cd vtk_dependencies
-        mv ../tcl.zip .
-        mv ../tk.zip .
-        mv ../qt.zip .
-        mv ../python.zip
-        unzip ./tcl.zip
-        unzip ./tk.zip
-        unzip ./qt.zip
-        unzip ./python.zip
+#  steps:
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#      
+#    - name: Install dependencies
+#      shell: pwsh
+#      run: |
+#        # unknown right now
+#    
+#    - name: Get TCL artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: TCL Install
+#    
+#    - name: Get TK artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: TK Install
+#        
+#    - name: Get QT artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: QT Install
+#    
+#    - name: Get Python artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: Python Install
+#    
+#    - name: Extract dependencies
+#      shell: pwsh
+#      run: |
+#        mkdir vtk_dependencies
+#        cd vtk_dependencies
+#        mv ../tcl.zip .
+#        mv ../tk.zip .
+#        mv ../qt.zip .
+#        mv ../python.zip
+#        unzip ./tcl.zip
+#        unzip ./tk.zip
+#        unzip ./qt.zip
+#        unzip ./python.zip
         
     
