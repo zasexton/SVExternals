@@ -1,0 +1,48 @@
+# Build Python for Windows 10
+
+name: Build Windows 10 Python
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  #push:
+  
+jobs:
+  build-windows-10-python:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+    
+    - name: Download Python
+      shell: pwsh
+      run: |
+        wget https://www.python.org/ftp/python/3.9.10/Python-3.9.10.tar.xz
+    
+    - name: Untar Python
+      shell: pwsh
+      run: |
+        tar -xf ./Python-3.9.10.tar.xz
+        
+    - name: Build Python
+      shell: pwsh
+      run: |
+        cd Python-3.9.10
+        ./PCBuild/build.bat
+    
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Python Install
+        path: ./Python-3.9.10
