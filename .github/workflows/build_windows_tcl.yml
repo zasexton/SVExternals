@@ -16,7 +16,7 @@ jobs:
     steps:
     
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
@@ -92,7 +92,7 @@ jobs:
     #    path: ./hdf5-hdf5-1_12_2/build/HDF5_1-12-2
     
     - name: Archive Build Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: TCL Install
         path: ./tcl8.6.13/win/tcl_install
