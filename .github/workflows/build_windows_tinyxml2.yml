@@ -59,7 +59,7 @@ jobs:
       run: |
         cd tinyxml2-6.2.0
         cd build
-        cmake --install . --prefix $(pwd)/tinyxml2_install
+        cmake --install .
         
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v3
