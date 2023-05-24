@@ -44,7 +44,7 @@ jobs:
     - name: Configuring SWIG
       shell: msys2 {0}
       run: |
-        pacman -S --needed --noconfirm autoconf automake libtool make mingw-w64-ucrt-x86_64-gcc
+        pacman -S --needed --noconfirm autoconf automake libtool make base-devel gcc
         cd swig-3.0.12
         ./autogen.sh
         mkdir swig_install
