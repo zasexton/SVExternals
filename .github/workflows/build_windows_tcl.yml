@@ -44,7 +44,9 @@ jobs:
         cd tcl8.6.13
         cd win
         mkdir tcl_install
-        nmake.exe -f makefile.vc
+        nmake.exe -f makefile.vc INSTALLDIR=./tcl_install
+        nmake.exe -f makefile.vc install INSTALLDIR=./tcl_install
+        dir
         
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
@@ -93,4 +95,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: TCL Install
-        path: ./tcl8.6.13/win/Release_AMD64_VC1929
+        path: ./tcl8.6.13/win/tcl_install
