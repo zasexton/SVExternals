@@ -28,12 +28,12 @@ jobs:
     - name: Download Python
       shell: pwsh
       run: |
-        wget https://www.python.org/ftp/python/3.9.10/Python-3.9.10.tar.xz
+        wget https://www.python.org/ftp/python/3.9.10/Python-3.9.10.tgz
     
     - name: Untar Python
       shell: pwsh
       run: |
-        tar -xf ./Python-3.9.10.tar.xz
+        tar -xvzf ./Python-3.9.10.tgz
         
     - name: Build Python
       shell: pwsh
