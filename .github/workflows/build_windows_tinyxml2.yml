@@ -1,0 +1,68 @@
+# Build TinyXML2 for Windows 10
+
+name: Build Windows 10 TinyXML2
+
+# Controls when action will run
+
+on:
+  workflow_dispatch:
+  
+  #push:
+  
+jobs:
+  build-windows-10-tinyxml2:
+    runs-on: windows-2019
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Install wget
+      run: |
+        choco install wget
+        
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
+    
+    - name: Download TinyXML2
+      shell: pwsh
+      run: |
+        wget https://github.com/leethomason/tinyxml2/archive/refs/tags/6.2.0.zip
+    
+    - name: Unzip TCL
+      shell: pwsh
+      run: |
+        unzip ./tinyxml2-6.2.0.zip
+        
+    - name: Configuring TinyXML2
+      shell: pwsh
+      run: |
+        cd tinyxml2-6.2.0
+        mkdir build
+        cd build
+        mkdir tinyxml2_install
+        cmake -DCMAKE_INSTALL_PREFIX=$(pwd)/tinyxml2_install -DCMAKE_BUILD_TYPE=Release .. 
+    
+    - name: Build TinyXML2
+      shell: pwsh
+      run: |
+        cd tinyxml2-6.2.0
+        cd build
+        cmake --build . --config Release
+    
+    - name: Install TinyXML2
+      shell: pwsh
+      run: |
+        cd tinyxml2-6.2.0
+        cd build
+        cmake --install . --prefix $(pwd)/tinyxml2_install
+        
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: TinyXML2 Install
+        path: ./tinyxml2-6.2.0/build/tinyxml2_install
