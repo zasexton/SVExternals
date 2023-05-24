@@ -47,7 +47,7 @@ jobs:
         cd Python-3.9.10
         cd PCbuild
         cd amd64
-        ./python_d.exe -m test
+        ./python.exe -m test
     
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v3
