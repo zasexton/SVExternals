@@ -38,20 +38,27 @@ jobs:
       run: |
         unzip ./v3.0.12.zip
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
 
     - name: Configuring SWIG
-      shell: pwsh
+      shell: msys2 {0}
       run: |
         cd swig-3.0.12
-        cd swig-3.0.12
-        ./configure
+        ./autogen.sh
+        mkdir swig_install
+        ./configure --prefix=./swig_install
         make
         make install
+    
+    - name: Test SWIG
+      shell: msys2 {0}
+      run: |
+        cd swig-3.0.12
+        make -k check
         
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: TCL Install
-        path: ./tcl8.6.13/win/tcl_install
+        name: SWIG Install
+        path: ./swig-3.0.12/swig_install
