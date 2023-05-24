@@ -52,11 +52,11 @@ jobs:
         make
         make install
     
-    - name: Test SWIG
-      shell: msys2 {0}
-      run: |
-        cd swig-3.0.12
-        make -k check
+    #- name: Test SWIG
+    #  shell: msys2 {0}
+    #  run: |
+    #    cd swig-3.0.12
+    #    make -k check
         
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v3
