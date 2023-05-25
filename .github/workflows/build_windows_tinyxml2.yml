@@ -52,7 +52,7 @@ jobs:
       run: |
         cd tinyxml2-6.2.0
         cd build
-        cmake --build . --target install --prefix $(pwd)/tinyxml2_install --config Release
+        cmake --build . --target install --install-prefix $(pwd)/tinyxml2_install --config Release
     
     #- name: Install TinyXML2
     #  shell: pwsh
