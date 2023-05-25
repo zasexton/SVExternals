@@ -30,16 +30,16 @@ jobs:
       uses: msys2/setup-msys2@v2
       
     - name: Download Qt5
-      shell: msys2 {0}
+      shell: pwsh
       run: |
-        cd /C
-        wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.tar.xz
+        cd C:
+        wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
         
     - name: Untar Qt5
-      shell: msys2 {0}
+      shell: pwsh
       run: |
-        cd /C
-        tar -xvzf ./qt-everywhere-src-5.14.2.tar.xz
+        cd C:
+        unzip ./qt-everywhere-src-5.14.2.zip
         
     - name: Configure Qt5
       shell: msys2 {0}
