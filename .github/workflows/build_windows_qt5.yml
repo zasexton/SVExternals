@@ -44,10 +44,10 @@ jobs:
            cp -r ./patches C:
            C:
            wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
-           Add-Type -AssemblyName System.IO.Compression.FileSystem
+           $7zPath = "C:\Program Files\7-Zip\7z.exe"
            $zipfile = "C:\qt-everywhere-src-5.14.2.zip"
            $destination = "C:\qt-everywhere-src-5.14.2"
-           [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $destination)
+           $7zPath e $zipfile -o $destination 
     #unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
     # cd .\qt5\qt-everywhere-src-5.14.2
            
