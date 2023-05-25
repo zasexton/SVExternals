@@ -47,7 +47,7 @@ jobs:
            $7zPath = "C:\Program Files\7-Zip\7z.exe"
            $zipfile = "C:\qt-everywhere-src-5.14.2.zip"
            $destination = "C:\qt-everywhere-src-5.14.2"
-           $7zPath x $zipfile -o $destination 
+           & $7zPath x $zipfile -o $destination 
     #unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
     # cd .\qt5\qt-everywhere-src-5.14.2
            
