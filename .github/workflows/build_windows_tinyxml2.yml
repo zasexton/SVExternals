@@ -52,15 +52,15 @@ jobs:
       run: |
         cd tinyxml2-6.2.0
         cd build
-        cmake --build . --config Release
+        cmake --build . --target install --prefix $(pwd)/tinyxml2_install --config Release
     
-    - name: Install TinyXML2
-      shell: pwsh
-      run: |
-        cd tinyxml2-6.2.0
-        cd build
-        cmake -h
-        cmake --prefix $(pwd)/tinyxml2_install --install .
+    #- name: Install TinyXML2
+    #  shell: pwsh
+    #  run: |
+    #    cd tinyxml2-6.2.0
+    #    cd build
+    #    cmake -h
+    #    cmake --prefix $(pwd)/tinyxml2_install --install .
         
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v3
