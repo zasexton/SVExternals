@@ -38,14 +38,18 @@ jobs:
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
      
-    - name: Download and Build Qt5 
+    - name: Download and Unzip Qt5 
       shell: pwsh
       run: |
            cp -r ./patches C:
            C:
            wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
-           unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
-           cd .\qt5\qt-everywhere-src-5.14.2
+           Add-Type -AssemblyName System.IO.Compression.FileSystem
+           $zipfile = "C:\qt-everywhere-src-5.14.2.zip"
+           $destination = "C:\qt-everywhere-src-5.14.2"
+           [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $destination)
+    #unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
+    # cd .\qt5\qt-everywhere-src-5.14.2
            
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
@@ -78,7 +82,7 @@ jobs:
            $newpath = $newpath.replace("C:\Program Files\Git\usr\bin","")
            $newpath = ($newpath + ";C:\msys64\usr\bin"+";C:\Program Files\Git\usr\bin")
            $env:Path = $newpath
-           ..\configure.bat -release -mp -pch -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandriodextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin -no-webengine-spellchecker -no-webengine-pepper-plugins -no-webengine-webrtc
+           ..\configure.bat -release -mp -pch -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin -no-webengine-spellchecker -no-webengine-pepper-plugins -no-webengine-webrtc
            C:\jom.exe
     # nmake.exe
    
