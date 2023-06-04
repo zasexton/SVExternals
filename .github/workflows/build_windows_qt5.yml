@@ -21,15 +21,15 @@ jobs:
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
       
-    - name: Install wget
-      run: |
-          choco install wget
+    #- name: Install wget
+    #  run: |
+    #      choco install wget
     
-    - name: Switch to C Disk
-      shell: pwsh
-      run: |
-          C:
-          pwd
+    #- name: Switch to D Disk
+    #  shell: pwsh
+    #  run: |
+    #      C:
+    #      pwd
     #- name: Install LLVM and Clang
     #  uses: KyleMayes/install-llvm-action@v1
     #  with:
@@ -41,11 +41,11 @@ jobs:
     - name: Download and Unzip Qt5 
       shell: pwsh
       run: |
-           cp -r ./patches C:
-           C:
+           cp -r ./patches D:
+           D:
            wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
            $7zPath = "C:\Program Files\7-Zip\7z.exe"
-           $zipfile = "C:\qt-everywhere-src-5.14.2.zip"
+           $zipfile = "D:\qt-everywhere-src-5.14.2.zip"
            & "C:\Program Files\7-Zip\7z.exe" x $zipfile -oC:\qt5 -bsp1
     #unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
     # cd .\qt5\qt-everywhere-src-5.14.2
@@ -56,33 +56,33 @@ jobs:
     - name: Download and Unzip JOM  
       shell: pwsh
       run: |
-           C:
+           D:
            wget https://download.qt.io/official_releases/jom/jom_1_1_3.zip
            unzip .\jom_1_1_3.zip
            
     - name: Apply Patches
       shell: pwsh
       run: |
-           C:
+           D:
            cd .\qt5\qt-everywhere-src-5.14.2
-           patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i C:/patches/qt-5.14.2-angle.patch
-           patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i C:/patches/qt-5.14.2-lab-color-space.patch
+           patch --verbose D:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i C:/patches/qt-5.14.2-angle.patch
+           patch --verbose D:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i C:/patches/qt-5.14.2-lab-color-space.patch
            mkdir build
            
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5
       shell: pwsh
       run: |
-           C:
+           D:
            cd .\qt5\qt-everywhere-src-5.14.2
            cd build
            $path = $env:Path
-           $newpath = $path.replace("C:\msys64\usr\bin","")
-           $newpath = $newpath.replace("C:\Program Files\Git\usr\bin","")
-           $newpath = ($newpath + ";C:\msys64\usr\bin"+";C:\Program Files\Git\usr\bin")
+           $newpath = $path.replace("D:\msys64\usr\bin","")
+           $newpath = $newpath.replace("D:\Program Files\Git\usr\bin","")
+           $newpath = ($newpath + ";D:\msys64\usr\bin"+";D:\Program Files\Git\usr\bin")
            $env:Path = $newpath
            ..\configure.bat -release -mp -pch -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin
-           C:\jom.exe
+           D:\jom.exe
     # nmake.exe
    
     #- name: Donwload Qt5 source and configure
