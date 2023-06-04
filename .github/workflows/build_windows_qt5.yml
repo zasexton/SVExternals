@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-windows-10-qt5:
-    runs-on: windows-2019
+    runs-on: self-hosted
 
     steps:
 
