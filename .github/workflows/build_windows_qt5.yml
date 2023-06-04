@@ -44,12 +44,11 @@ jobs:
            cp -r ./patches D:
            D:
            wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
-           $7zPath = "C:\Program Files\7-Zip\7z.exe"
-           $zipfile = "D:\qt-everywhere-src-5.14.2.zip"
-           & "C:\Program Files\7-Zip\7z.exe" x $zipfile -oC:\qt5 -bsp1
-    #unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
-    # cd .\qt5\qt-everywhere-src-5.14.2
-           
+           unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
+           cd .\qt5\qt-everywhere-src-5.14.2
+    # $7zPath = "C:\Program Files\7-Zip\7z.exe"
+    # $zipfile = "D:\qt-everywhere-src-5.14.2.zip"
+    # & "C:\Program Files\7-Zip\7z.exe" x $zipfile -oC:\qt5 -bsp1
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
       
