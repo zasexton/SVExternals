@@ -66,7 +66,6 @@ jobs:
            C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o D:\jom_1_1_3.zip -d .
            
     - name: Apply Patches
-      shell: pwsh
       run: |
            D:
            cd .\qt-everywhere-src-5.14.2
@@ -76,10 +75,9 @@ jobs:
            
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5
-      shell: pwsh
       run: |
            D:
-           cd .\qt5\qt-everywhere-src-5.14.2
+           cd .\qt-everywhere-src-5.14.2
            cd build
            $path = $env:Path
            $newpath = $path.replace("D:\msys64\usr\bin","")
