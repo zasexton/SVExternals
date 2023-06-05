@@ -9,8 +9,6 @@ on:
   
   #push:
 
-permissions: read-all|write-all
-
 jobs:
   build-windows-10-qt5:
     runs-on: self-hosted
@@ -42,7 +40,7 @@ jobs:
     
     - name: Copy Patch Directory
       run: | 
-           cp -r ./patches D:
+           Copy-Item ./patches -Destination D: -Recurse -Force 
       
     - name: Download and Unzip Qt5 
       run: |
