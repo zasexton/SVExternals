@@ -40,6 +40,7 @@ jobs:
      
     - name: Download and Unzip Qt5 
       run: |
+           Get-ExecutionPolicy -List
            cp -r ./patches D:
     #D:
     #wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
