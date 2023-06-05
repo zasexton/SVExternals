@@ -71,23 +71,23 @@ jobs:
            cd .\qt-everywhere-src-5.14.2
            patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i D:/patches/qt-5.14.2-angle.patch
            patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i D:/patches/qt-5.14.2-lab-color-space.patch
-           mkdir build
            
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5
       run: |
            D:
            cd .\qt-everywhere-src-5.14.2
+           mkdir build
            cd build
-           $path = $env:Path
-           $newpath = $path.replace("D:\msys64\usr\bin","")
-           $newpath = $newpath.replace("D:\Program Files\Git\usr\bin","")
-           $newpath = ($newpath + ";D:\msys64\usr\bin"+";D:\Program Files\Git\usr\bin")
-           $env:Path = $newpath
            ..\configure.bat -release -mp -pch -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin
            D:\jom.exe
+           
     # nmake.exe
-   
+    # $path = $env:Path
+    #       $newpath = $path.replace("D:\msys64\usr\bin","")
+    #       $newpath = $newpath.replace("D:\Program Files\Git\usr\bin","")
+    #       $newpath = ($newpath + ";D:\msys64\usr\bin"+";D:\Program Files\Git\usr\bin")
+    #       $env:Path = $newpath
     #- name: Donwload Qt5 source and configure
     #  shell: cmd
     #  run: |
@@ -122,5 +122,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: qt-5.14.2-windows
-        path: C:\qt5\qt-everywhere-src-5.14.2\build\qtbase
+        path: D:\qt-everywhere-src-5.14.2\build\qtbase
         
