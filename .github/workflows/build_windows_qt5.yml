@@ -47,7 +47,7 @@ jobs:
            Copy-Item ./patches -Destination D: -Recurse -Force
            cd D:
            C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
-           Expand-Archive -Path "D:\qt-everywhere-src-5.14.2.zip" -DestinationPath .
+           C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe "D:\qt-everywhere-src-5.14.2.zip" -d .
            
     #D:
     #wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
@@ -60,11 +60,10 @@ jobs:
     #  uses: mxschmitt/action-tmate@v3
     
     - name: Download and Unzip JOM  
-      shell: pwsh
       run: |
            D:
            C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe https://download.qt.io/official_releases/jom/jom_1_1_3.zip
-           Expand-Archive -Path D:\jom_1_1_3.zip
+           C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe D:\jom_1_1_3.zip -d .
            
     - name: Apply Patches
       shell: pwsh
