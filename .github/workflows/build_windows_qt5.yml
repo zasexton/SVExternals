@@ -39,7 +39,6 @@ jobs:
     #  uses: mxschmitt/action-tmate@v3
      
     - name: Download and Unzip Qt5 
-      shell: pwsh
       run: |
            cp -r ./patches D:
     #D:
