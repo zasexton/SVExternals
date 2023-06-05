@@ -46,8 +46,8 @@ jobs:
       run: |
            Copy-Item ./patches -Destination D: -Recurse -Force
            cd D:
-           C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip" -d .\qt5
-           Expand-Archive -Path "D:\qt5\qt-everywhere-src-5.14.2.zip" -DestinationPath .
+           C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
+           Expand-Archive -Path "D:\qt-everywhere-src-5.14.2.zip" -DestinationPath .
            
     #D:
     #wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
@@ -63,16 +63,16 @@ jobs:
       shell: pwsh
       run: |
            D:
-           wget https://download.qt.io/official_releases/jom/jom_1_1_3.zip
-           unzip .\jom_1_1_3.zip
+           C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe https://download.qt.io/official_releases/jom/jom_1_1_3.zip
+           Expand-Archive -Path D:\jom_1_1_3.zip
            
     - name: Apply Patches
       shell: pwsh
       run: |
            D:
-           cd .\qt5\qt-everywhere-src-5.14.2
-           patch --verbose D:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i C:/patches/qt-5.14.2-angle.patch
-           patch --verbose D:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i C:/patches/qt-5.14.2-lab-color-space.patch
+           cd .\qt-everywhere-src-5.14.2
+           patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i C:/patches/qt-5.14.2-angle.patch
+           patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i C:/patches/qt-5.14.2-lab-color-space.patch
            mkdir build
            
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
