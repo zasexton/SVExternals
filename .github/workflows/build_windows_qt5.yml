@@ -41,7 +41,7 @@ jobs:
     
     - name: Boot up Virtual Windows
       run: |
-           VBoxManage.exe startvm "Win10VM" --type headless
+           powershell VBoxManage.exe startvm "Win10VM" --type headless
            
     - name: Download and Unzip Qt5 
       run: |
