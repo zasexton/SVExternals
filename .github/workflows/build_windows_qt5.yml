@@ -17,9 +17,6 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v2
-    
-    - name: Setup MSVC
-      uses: ilammy/msvc-dev-cmd@v1
       
     #- name: Install wget
     #  run: |
@@ -41,7 +38,10 @@ jobs:
     #- name: Copy Patch Directory
     #  run: | 
     #       Copy-Item ./patches -Destination D: -Recurse -Force 
-      
+    - name: Boot up Virtual Windows
+      run: |
+           VBoxManage startvm "Win10VM" --type headless
+           
     - name: Download and Unzip Qt5 
       run: |
            Copy-Item ./patches -Destination D: -Recurse -Force
@@ -64,23 +64,33 @@ jobs:
            D:
            C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe https://download.qt.io/official_releases/jom/jom_1_1_3.zip -N
            C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o D:\jom_1_1_3.zip -d .
-           
+   
     - name: Apply Patches
       run: |
            D:
            cd .\qt-everywhere-src-5.14.2
            patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i D:/patches/qt-5.14.2-angle.patch
            patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i D:/patches/qt-5.14.2-lab-color-space.patch
-           
-   # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
-    - name: Build Qt5
+   
+    - name: Transfer Files to Virtual Machine
       run: |
-           D:
+           wsl
+           cd /mnt/d/
+           sshpass -p simvascular scp ./jom.exe marsden_lab@192.168.137.16:Downloads
+           sshpass -p simvascular scp -r ./qt-everywhere-src-5.14.2 marsden_lab@192.168.137.16:Downloads
+   # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
+    - name: Build Qt5 on Virtual Machine
+      run: |
+           wsl
+           sshpass -p simvascular marsden_lab@192.168.137.16
+           cd Downloads
            cd .\qt-everywhere-src-5.14.2
            mkdir build
+           set CL=/MP
            cd build
+           cmd /K vcvarsall.bat x64
            ..\configure.bat -release -mp -pch -prefix "%CD%\qtbase" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin
-           D:\jom.exe
+           C:\Users\marsden_lab\Downloads\jom.exe
            
     # nmake.exe
     # $path = $env:Path
