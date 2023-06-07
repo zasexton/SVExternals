@@ -47,7 +47,7 @@ jobs:
       run: |
            Copy-Item ./patches -Destination D: -Recurse -Force
            cd D:
-           C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
+           C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe -O "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
            C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o "D:\qt-everywhere-src-5.14.2.zip" -d .
 
     - name: Boot up Virtual Windows
