@@ -38,9 +38,10 @@ jobs:
     #- name: Copy Patch Directory
     #  run: | 
     #       Copy-Item ./patches -Destination D: -Recurse -Force 
+    
     - name: Boot up Virtual Windows
       run: |
-           VBoxManage startvm "Win10VM" --type headless
+           & 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' startvm "Win10VM" --type headless
            
     - name: Download and Unzip Qt5 
       run: |
