@@ -41,7 +41,7 @@ jobs:
     
     - name: Boot up Virtual Windows
       run: |
-           & 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' startvm "Win10VM" --type headless
+           VBoxManage.exe startvm "Win10VM" --type headless
            
     - name: Download and Unzip Qt5 
       run: |
