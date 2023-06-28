@@ -44,12 +44,12 @@ jobs:
       run: |
            VBoxManage.exe startvm "Win10VM" --type headless
            
-    - name: Download and Unzip Qt5 
-      run: |
-           D:
-           C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
-           C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o "./qt-everywhere-src-5.14.2.zip" -d .
-           rm D:\qt-everywhere-src-5.14.2.zip
+    #- name: Download and Unzip Qt5 
+    #  run: |
+    #       D:
+    #       C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
+    #       C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o "./qt-everywhere-src-5.14.2.zip" -d .
+    #       rm D:\qt-everywhere-src-5.14.2.zip
            
     #- name: Boot up Virtual Windows
     #  run: |
@@ -64,11 +64,11 @@ jobs:
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
     
-    - name: Download and Unzip JOM  
-      run: |
-           D:
-           C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe https://download.qt.io/official_releases/jom/jom_1_1_3.zip -N
-           C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o ./jom_1_1_3.zip -d .
+    #- name: Download and Unzip JOM  
+    #  run: |
+    #       D:
+    #       C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe https://download.qt.io/official_releases/jom/jom_1_1_3.zip -N
+    #       C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o ./jom_1_1_3.zip -d .
    
     - name: Apply Patches
       run: |
