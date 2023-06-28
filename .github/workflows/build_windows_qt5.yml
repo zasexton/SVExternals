@@ -84,16 +84,16 @@ jobs:
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5 on Virtual Machine
       run: |
-           wsl sshpass -p simvascular ssh marsden_lab@192.168.137.16 
-           cd Downloads
-           cd .\qt-everywhere-src-5.14.2
-           mkdir build
-           set CL=/MP
-           cd build
-           cmd /K vcvarsall.bat x64
-           ..\configure.bat -release -mp -pch -prefix "C:\Users\Downloads\qt5_install" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin
-           C:\Users\marsden_lab\Downloads\jom.exe
-           C:\Users\marsden_lab\Downloads\jom.exe install
+           plink -pw simvascular -ssh marsden_lab@192.168.137.16 'cd Downloads; cd .\qt-everywhere-src-5.14.2; mkdir build; set CL=/MP; cd build; cmd /K vcvarsall.bat x64; ..\configure.bat -release -mp -pch -prefix "C:\Users\Downloads\qt5_install" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin; C:\Users\marsden_lab\Downloads\jom.exe; C:\Users\marsden_lab\Downloads\jom.exe install' 
+   #        cd Downloads
+   #        cd .\qt-everywhere-src-5.14.2
+   #        mkdir build
+   #        set CL=/MP
+   #        cd build
+   #        cmd /K vcvarsall.bat x64
+   #        ..\configure.bat -release -mp -pch -prefix "C:\Users\Downloads\qt5_install" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin
+   #        C:\Users\marsden_lab\Downloads\jom.exe
+   #        C:\Users\marsden_lab\Downloads\jom.exe install
     
     - name: Transfer Qt5 Build
       run: |
