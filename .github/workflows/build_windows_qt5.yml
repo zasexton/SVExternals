@@ -81,6 +81,7 @@ jobs:
       run: |
            D:
            D:\pscp.exe -pw simvascular D:\jom.exe marsden_lab@192.168.137.16:Downloads
+           D:\plink.exe -pw simvascular -ssh marsden_lab@192.168.137.16 "cd Downloads; mkdir qt-everywhere-src-5.14.2"
            D:\pscp.exe -pw simvascular -r D:\qt-everywhere-src-5.14.2 marsden_lab@192.168.137.16:Downloads/qt-everywhere-src-5.14.2
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5 on Virtual Machine
