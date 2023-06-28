@@ -79,8 +79,8 @@ jobs:
    
     - name: Transfer Files to Virtual Machine
       run: |
-           pscp -pw simvascular /mnt/d/jom.exe marsden_lab@192.168.137.16:Downloads
-           pscp -pw simvascular -r /mnt/d/qt-everywhere-src-5.14.2 marsden_lab@192.168.137.16:Downloads/qt-everywhere-src-5.14.2
+           pscp -pw simvascular D:\jom.exe marsden_lab@192.168.137.16:Downloads
+           pscp -pw simvascular -r D:\qt-everywhere-src-5.14.2 marsden_lab@192.168.137.16:Downloads/qt-everywhere-src-5.14.2
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5 on Virtual Machine
       run: |
@@ -97,8 +97,8 @@ jobs:
     
     - name: Transfer Qt5 Build
       run: |
-           wsl
-           sshpass -p simvascular scp -r marsden_lab@192.168.137.16:Downloads\qt5_install \mnt\d\
+           D:
+           pscp -pw simvascular -r marsden_lab@192.168.137.16:Downloads\qt5_install D:
            
     # nmake.exe
     # $path = $env:Path
