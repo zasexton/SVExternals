@@ -43,7 +43,7 @@ jobs:
       shell: pwsh
       run: |
            VBoxManage.exe startvm "Win10VM" --type headless
-           
+           Start-Sleep -Seconds 90
     #- name: Download and Unzip Qt5 
     #  run: |
     #       D:
@@ -70,23 +70,21 @@ jobs:
     #       C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe https://download.qt.io/official_releases/jom/jom_1_1_3.zip -N
     #       C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o ./jom_1_1_3.zip -d .
    
-    - name: Apply Patches
-      run: |
-           D:
-           cd .\qt-everywhere-src-5.14.2
-           patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i D:/patches/qt-5.14.2-angle.patch
-           patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i D:/patches/qt-5.14.2-lab-color-space.patch
+    #- name: Apply Patches
+    #  run: |
+    #       D:
+    #       cd .\qt-everywhere-src-5.14.2
+    #       patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i D:/patches/qt-5.14.2-angle.patch
+    #       patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i D:/patches/qt-5.14.2-lab-color-space.patch
    
     - name: Transfer Files to Virtual Machine
       run: |
-           wsl
-           sshpass -p simvascular scp /mnt/d/jom.exe marsden_lab@192.168.137.16:Downloads
-           sshpass -p simvascular scp -r /mnt/d/qt-everywhere-src-5.14.2 marsden_lab@192.168.137.16:Downloads
+           wsl sshpass -p simvascular scp /mnt/d/jom.exe marsden_lab@192.168.137.16:Downloads
+           wsl sshpass -p simvascular scp -r /mnt/d/qt-everywhere-src-5.14.2 marsden_lab@192.168.137.16:Downloads
    # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
     - name: Build Qt5 on Virtual Machine
       run: |
-           wsl
-           sshpass -p simvascular ssh marsden_lab@192.168.137.16
+           wsl sshpass -p simvascular ssh marsden_lab@192.168.137.16 
            cd Downloads
            cd .\qt-everywhere-src-5.14.2
            mkdir build
