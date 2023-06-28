@@ -39,9 +39,9 @@ jobs:
     #  run: | 
     #       Copy-Item ./patches -Destination D: -Recurse -Force 
     
-    #- name: Boot up Virtual Windows
-    #  run: |
-    #       powershell VBoxManage.exe startvm "Win10VM" --type headless
+    - name: Boot up Virtual Windows
+      run: |
+           powershell VBoxManage.exe startvm "Win10VM" --type headless
            
     - name: Download and Unzip Qt5 
       run: |
