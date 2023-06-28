@@ -51,9 +51,9 @@ jobs:
            C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o "./qt-everywhere-src-5.14.2.zip" -d .
            rm D:\qt-everywhere-src-5.14.2.zip
            
-    - name: Boot up Virtual Windows
-      run: |
-           powershell VBoxManage.exe startvm "Win10VM" --type headless
+    #- name: Boot up Virtual Windows
+    #  run: |
+    #       powershell VBoxManage.exe startvm "Win10VM" --type headless
     #D:
     #wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
     #unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
