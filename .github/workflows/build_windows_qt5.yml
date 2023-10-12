@@ -45,7 +45,14 @@ jobs:
           cd build
           cmd /K vcvarsall.bat x64
           jom.exe
-    
+
+    - name: Install Qt5
+      shell: cmd
+      run: |
+          cd qt5
+          cd build
+          cmd /K vcvarsall.bat x64
+          jom.exe install
         
     - name: Archive build artifact
       uses: actions/upload-artifact@v2
