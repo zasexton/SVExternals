@@ -111,7 +111,6 @@ jobs:
     #       $newpath = ($newpath + ";D:\msys64\usr\bin"+";D:\Program Files\Git\usr\bin")
     #       $env:Path = $newpath
     - name: Download Qt5 Source
-      shell: pwsh
       run: |
           git clone https://github.com/qt/qt5.git
           mkdir qt5_install
@@ -120,7 +119,6 @@ jobs:
           git submodule update --init --recursive
           
     - name: Configure Qt5 Source
-      shell: pwsh
       run: |
           cd qt5
           set CL=/MP
@@ -130,7 +128,6 @@ jobs:
           ..\configure.bat -opensource -confirm-license --prefix=../../qt5_install -release -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations
           
     - name: Building Qt5
-      shell: pwsh
       run: |
           cd qt5
           cd build
