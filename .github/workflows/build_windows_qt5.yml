@@ -17,100 +17,10 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v2
+
       
-    #- name: Install wget
-    #  run: |
-    #      choco install wget
-    
-    #- name: Switch to D Disk
-    #  shell: pwsh
-    #  run: |
-    #      C:
-    #      pwd
-    #- name: Install LLVM and Clang
-    #  uses: KyleMayes/install-llvm-action@v1
-    #  with:
-    #    version: "10.0"
-        
-    #- name: Setup tmate session
-    #  uses: mxschmitt/action-tmate@v3
-    
-    #- name: Copy Patch Directory
-    #  run: | 
-    #       Copy-Item ./patches -Destination D: -Recurse -Force 
-    
-    #- name: Boot up Virtual Windows
-    #  shell: pwsh
-    #  run: |
-    #       VBoxManage.exe startvm "Win10VM" --type headless
-    #       Start-Sleep -Seconds 50
-    #- name: Download and Unzip Qt5 
-    #  run: |
-    #       D:
-    #       C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe "https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip"
-    #       C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o "./qt-everywhere-src-5.14.2.zip" -d .
-    #       rm D:\qt-everywhere-src-5.14.2.zip
-           
-    #- name: Boot up Virtual Windows
-    #  run: |
-    #       powershell VBoxManage.exe startvm "Win10VM" --type headless
-    #D:
-    #wget https://download.qt.io/archive/qt/5.14/5.14.2/single/qt-everywhere-src-5.14.2.zip
-    #unzip .\qt-everywhere-src-5.14.2.zip -d .\qt5
-    # cd .\qt5\qt-everywhere-src-5.14.2
-    # $7zPath = "C:\Program Files\7-Zip\7z.exe"
-    # $zipfile = "D:\qt-everywhere-src-5.14.2.zip"
-    # & "C:\Program Files\7-Zip\7z.exe" x $zipfile -oC:\qt5 -bsp1
-    #- name: Setup tmate session
-    #  uses: mxschmitt/action-tmate@v3
-    
-    #- name: Download and Unzip JOM  
-    #  run: |
-    #       D:
-    #       C:\ProgramData\chocolatey\lib\Wget\tools\wget.exe https://download.qt.io/official_releases/jom/jom_1_1_3.zip -N
-    #       C:\ProgramData\chocolatey\lib\unzip\tools\unzip.exe -o ./jom_1_1_3.zip -d .
-   
-    #- name: Apply Patches
-    #  run: |
-    #       D:
-    #       cd .\qt-everywhere-src-5.14.2
-    #       patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i D:/patches/qt-5.14.2-angle.patch
-    #       patch --verbose D:/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i D:/patches/qt-5.14.2-lab-color-space.patch
-   
-    #- name: Transfer Files to Virtual Machine
-    #  run: |
-    #       D:
-    #       D:\pscp.exe -pw simvascular D:\jom.exe marsden_lab@192.168.137.16:Downloads
-    #       D:\plink.exe -pw simvascular -ssh marsden_lab@192.168.137.16 "cd Downloads; mkdir qt-everywhere-src-5.14.2"
-    #       D:\pscp.exe -pw simvascular -r D:\qt-everywhere-src-5.14.2 marsden_lab@192.168.137.16:Downloads/qt-everywhere-src-5.14.2
-   # SECOND PATCH patch --verbose C:/qt5/qt-everywhere-src-5.14.2/qtwebengine/src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/base/circular_queue.h -i C:/patches/qt-5.14.2-circular-queue.patch
-   # - name: Build Qt5 on Virtual Machine
-   #   run: |
-   #        D:\plink.exe -pw simvascular -ssh marsden_lab@192.168.137.16:Downloads\qt-everywhere-src-5.14.2 mkdir build
-   #        D:\plink.exe -pw simvascular -ssh marsden_lab@192.168.137.16:Downloads\qt-everywhere-src-5.14.2 set CL=/MP
-   #        D:\plink.exe -pw simvascular -ssh marsden_lab@192.168.137.16:Downloads\qt-everywhere-src-5.14.2\build cmd /K vcvarsall.bat x64 && ..\configure.bat -release -mp -pch -prefix "C:\Users\Downloads\qt5_install" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop
-   #        cd Downloads
-   #        cd .\qt-everywhere-src-5.14.2
-   #        mkdir build
-   #        set CL=/MP
-   #        cd build
-   #        cmd /K vcvarsall.bat x64
-   #        ..\configure.bat -release -mp -pch -prefix "C:\Users\Downloads\qt5_install" -opensource -confirm-license -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtwebsockets -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations -skip qtwebview -skip qtandroidextras -skip qtactiveqt -skip qtimageformats -skip qtwebchannel -skip qtwebview -skip qtx11extras -skip qtwayland -skip qtserialport -skip qtwebglplugin
-   #        C:\Users\marsden_lab\Downloads\jom.exe
-   #        C:\Users\marsden_lab\Downloads\jom.exe install
-    
-    #- name: Transfer Qt5 Build
-    #  run: |
-    #       D:
-    #       D:\pscp.exe -pw simvascular -r marsden_lab@192.168.137.16:Downloads\qt5_install D:
-           
-    # nmake.exe
-    # $path = $env:Path
-    #       $newpath = $path.replace("D:\msys64\usr\bin","")
-    #       $newpath = $newpath.replace("D:\Program Files\Git\usr\bin","")
-    #       $newpath = ($newpath + ";D:\msys64\usr\bin"+";D:\Program Files\Git\usr\bin")
-    #       $env:Path = $newpath
     - name: Download Qt5 Source
+      shell: cmd
       run: |
           git clone https://github.com/qt/qt5.git
           mkdir qt5_install
@@ -119,6 +29,7 @@ jobs:
           git submodule update --init --recursive
           
     - name: Configure Qt5 Source
+      shell: cmd
       run: |
           cd qt5
           set CL=/MP
@@ -128,24 +39,13 @@ jobs:
           ..\configure.bat -opensource -confirm-license --prefix=../../qt5_install -release -nomake examples -nomake tests -opengl desktop -skip qtconnectivity -skip qtdoc -skip qtsensors -skip qtgamepad -skip qtlocation -skip qtspeech -skip qtscxml -skip qtremoteobjects -skip qtquickcontrols -skip qtquickcontrols2 -skip qtmacextras -skip qtlottie -skip qtserialbus -skip qttranslations
           
     - name: Building Qt5
+      shell: cmd
       run: |
           cd qt5
           cd build
           cmd /K vcvarsall.bat x64
           jom.exe
     
-    #- name: Checkout MSVC repository
-    #  uses: ilammy/msvc-dev-cmd@v1
-      
-    #- name: Which directory
-    #  run: |
-    #    echo "This is the current directory"
-    #    echo "============================="
-    #    echo "%CD%"
-
-    #- name: Build Qt5
-    #  run: |
-    #    namke 
         
     - name: Archive build artifact
       uses: actions/upload-artifact@v2
