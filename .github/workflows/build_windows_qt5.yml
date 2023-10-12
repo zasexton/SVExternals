@@ -27,6 +27,13 @@ jobs:
           cd qt5
           git checkout v5.15.10
           git submodule update --init --recursive
+
+    #- name: Apply Patches
+    #  shell: cmd
+    #  run: |
+    #       cd .\qt-everywhere-src-5.14.2
+    #       patch --verbose qt5/qtwebengine/src/3rdparty/chromium/third_party/angle/BUILD.gn -i patches/qt-5.14.2-angle.patch
+    #       patch --verbose qt5/qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/platform/graphics/lab_color_space.h -i /patches/qt-5.14.2-lab-color-space.patch
           
     - name: Configure Qt5 Source
       shell: cmd
